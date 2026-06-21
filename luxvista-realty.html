@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuxVista Realty — Where Luxury Meets Location</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a1628;
+  --navy-light:#132244;
+  --navy-mid:#1a2d4a;
+  --gold:#c9a84c;
+  --gold-light:#e8d08a;
+  --gold-glow:rgba(201,168,76,0.3);
+  --white:#ffffff;
+  --off-white:#f8f7f4;
+  --cream:#f5f0e8;
+  --gray:#8a8f98;
+  --gray-light:#d1d5db;
+  --gradient-gold:linear-gradient(135deg,#c9a84c,#e8d08a,#c9a84c);
+  --gradient-navy:linear-gradient(135deg,#0a1628 0%,#132244 50%,#1a2d4a 100%);
+  --shadow-lg:0 20px 60px rgba(10,22,40,0.3);
+  --shadow-md:0 10px 30px rgba(10,22,40,0.15);
+  --shadow-sm:0 4px 12px rgba(10,22,40,0.08);
+  --radius:12px;
+  --radius-lg:24px;
+  --transition:0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  --font-heading:'Playfair Display',Georgia,serif;
+  --font-body:'Inter',-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--off-white);
+  color:var(--navy);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ===== LOADER ===== */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;
+  transition:opacity 0.6s ease,visibility 0.6s ease;
+}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-ring{
+  width:60px;height:60px;
+  border:3px solid rgba(201,168,76,0.15);
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:spin 0.9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loader-text{
+  font-family:var(--font-heading);
+  color:var(--gold);
+  font-size:1.1rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  animation:pulse-text 1.5s ease-in-out infinite;
+}
+@keyframes pulse-text{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:20px 0;
+  transition:all var(--transition);
+}
+nav.scrolled{
+  background:rgba(10,22,40,0.88);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  padding:12px 0;
+  box-shadow:0 4px 30px rgba(0,0,0,0.2);
+  border-bottom:1px solid rgba(201,168,76,0.1);
+}
+nav .container{
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{
+  display:flex;align-items:center;gap:12px;
+  font-family:var(--font-heading);
+  font-size:1.6rem;font-weight:700;
+  color:var(--white);
+  letter-spacing:1px;
+}
+.logo-icon{
+  width:40px;height:40px;
+  background:var(--gradient-gold);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:var(--navy);
+  font-weight:900;
+  flex-shrink:0;
+}
+.logo span{background:var(--gradient-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{
+  font-size:0.85rem;font-weight:500;color:rgba(255,255,255,0.8);
+  text-transform:uppercase;letter-spacing:1.5px;
+  transition:color var(--transition);
+  position:relative;
+  padding:4px 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;
+  width:0;height:1.5px;
+  background:var(--gold);
+  transition:width var(--transition);
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.nav-cta{
+  background:var(--gradient-gold);
+  color:var(--navy) !important;
+  padding:10px 24px !important;
+  border-radius:50px;
+  font-weight:600 !important;
+  text-transform:none !important;
+  letter-spacing:0.5px !important;
+  transition:all var(--transition) !important;
+  box-shadow:0 4px 15px var(--gold-glow);
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px var(--gold-glow);color:var(--navy) !important}
+.nav-cta::after{display:none !important}
+
+/* Hamburger */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:8px;background:none;border:none;z-index:1001;
+}
+.hamburger span{
+  display:block;width:28px;height:2px;
+  background:var(--white);
+  border-radius:2px;
+  transition:all var(--transition);
+  transform-origin:center;
+}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0;transform:translateX(-10px)}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile overlay */
+.mobile-overlay{
+  position:fixed;inset:0;z-index:998;
+  background:rgba(10,22,40,0.95);
+  backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;
+  opacity:0;visibility:hidden;
+  transition:all var(--transition);
+}
+.mobile-overlay.open{opacity:1;visibility:visible}
+.mobile-overlay a{
+  font-family:var(--font-heading);
+  font-size:2rem;color:var(--white);
+  transition:color var(--transition);
+}
+.mobile-overlay a:hover{color:var(--gold)}
+.mobile-overlay .nav-cta{font-size:1.1rem !important;padding:14px 36px !important}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--gradient-navy);
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 50%);
+}
+.hero-particles{
+  position:absolute;inset:0;overflow:hidden;
+}
+.particle{
+  position:absolute;
+  width:3px;height:3px;
+  background:var(--gold);
+  border-radius:50%;
+  opacity:0;
+  animation:particleFloat 8s infinite;
+}
+@keyframes particleFloat{
+  0%{transform:translateY(100vh) scale(0);opacity:0}
+  20%{opacity:0.6}
+  80%{opacity:0.6}
+  100%{transform:translateY(-10vh) scale(1);opacity:0}
+}
+.hero-grid-lines{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size:80px 80px;
+}
+.hero-content{
+  position:relative;z-index:2;
+  text-align:center;padding:0 24px;
+  max-width:900px;
+}
+.hero-badge{
+  display:inline-block;
+  background:rgba(201,168,76,0.12);
+  border:1px solid rgba(201,168,76,0.25);
+  color:var(--gold-light);
+  padding:8px 24px;
+  border-radius:50px;
+  font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:28px;
+  animation:fadeInDown 0.8s ease forwards;
+  opacity:0;
+}
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-title{
+  font-family:var(--font-heading);
+  font-size:clamp(2.8rem, 7vw, 5.2rem);
+  font-weight:700;
+  line-height:1.1;
+  color:var(--white);
+  margin-bottom:20px;
+  animation:fadeInUp 0.8s ease 0.2s forwards;
+  opacity:0;
+}
+.hero-title .highlight{
+  background:var(--gradient-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  display:inline-block;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hero-sub{
+  font-size:clamp(1rem, 2vw, 1.25rem);
+  color:rgba(255,255,255,0.65);
+  max-width:600px;margin:0 auto 40px;
+  font-weight:300;line-height:1.7;
+  animation:fadeInUp 0.8s ease 0.4s forwards;
+  opacity:0;
+}
+.hero-buttons{
+  display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+  animation:fadeInUp 0.8s ease 0.6s forwards;
+  opacity:0;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gradient-gold);
+  color:var(--navy);font-weight:600;
+  padding:16px 36px;border-radius:50px;
+  font-size:1rem;letter-spacing:0.5px;
+  transition:all var(--transition);
+  box-shadow:0 4px 20px var(--gold-glow);
+  border:none;cursor:pointer;
+  animation:pulse-glow 3s ease-in-out infinite;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 35px var(--gold-glow)}
+@keyframes pulse-glow{
+  0%,100%{box-shadow:0 4px 20px var(--gold-glow)}
+  50%{box-shadow:0 4px 40px rgba(201,168,76,0.5)}
+}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;
+  color:var(--white);font-weight:500;
+  padding:16px 36px;border-radius:50px;
+  font-size:1rem;letter-spacing:0.5px;
+  border:1.5px solid rgba(255,255,255,0.25);
+  transition:all var(--transition);
+  cursor:pointer;
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.08);border-color:var(--gold);color:var(--gold)}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.4);
+  font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;
+  animation:fadeInUp 0.8s ease 0.9s forwards;
+  opacity:0;
+}
+.scroll-line{
+  width:1px;height:40px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{
+  0%,100%{opacity:0.3;transform:scaleY(0.5)}
+  50%{opacity:1;transform:scaleY(1)}
+}
+
+/* ===== SECTION COMMON ===== */
+.section{padding:100px 0;position:relative}
+.section-label{
+  display:inline-block;
+  font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);font-weight:600;
+  margin-bottom:12px;
+}
+.section-title{
+  font-family:var(--font-heading);
+  font-size:clamp(2rem, 4vw, 3rem);
+  font-weight:700;
+  margin-bottom:16px;
+  line-height:1.2;
+}
+.section-title .highlight{
+  background:var(--gradient-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.section-desc{
+  color:var(--gray);
+  max-width:600px;
+  font-size:1.05rem;
+  line-height:1.7;
+}
+
+/* ===== STATS ===== */
+.stats{
+  background:var(--navy);
+  padding:80px 0;
+  position:relative;
+  overflow:hidden;
+}
+.stats::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:32px;
+  position:relative;z-index:1;
+}
+.stat-item{text-align:center}
+.stat-number{
+  font-family:var(--font-heading);
+  font-size:clamp(2.5rem, 4vw, 3.5rem);
+  font-weight:700;
+  background:var(--gradient-gold);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.1;
+}
+.stat-plus{font-size:2rem;background:var(--gradient-gold);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{
+  color:rgba(255,255,255,0.6);
+  font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;
+  margin-top:8px;
+}
+
+/* ===== FEATURED PROPERTIES ===== */
+.featured{background:var(--off-white)}
+.properties-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;
+  margin-top:50px;
+}
+.property-card{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:all var(--transition);
+  cursor:pointer;
+  position:relative;
+  transform:translateY(60px);opacity:0;
+}
+.property-card.visible{transform:translateY(0);opacity:1}
+.property-card:hover{
+  transform:translateY(-8px) !important;
+  box-shadow:var(--shadow-lg);
+}
+.property-img{
+  height:240px;position:relative;overflow:hidden;
+}
+.property-img img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 0.8s ease;
+}
+.property-card:hover .property-img img{transform:scale(1.1)}
+.property-badge{
+  position:absolute;top:16px;left:16px;
+  background:var(--gradient-gold);
+  color:var(--navy);
+  padding:6px 16px;border-radius:50px;
+  font-size:0.75rem;font-weight:700;
+  letter-spacing:0.5px;
+}
+.property-price{
+  position:absolute;bottom:16px;right:16px;
+  background:rgba(10,22,40,0.88);
+  backdrop-filter:blur(8px);
+  color:var(--gold);
+  padding:8px 18px;border-radius:50px;
+  font-family:var(--font-heading);
+  font-size:1.1rem;font-weight:700;
+}
+.property-info{padding:24px}
+.property-info h3{
+  font-family:var(--font-heading);
+  font-size:1.25rem;font-weight:600;
+  margin-bottom:6px;
+}
+.property-location{
+  display:flex;align-items:center;gap:6px;
+  color:var(--gray);
+  font-size:0.85rem;
+  margin-bottom:14px;
+}
+.property-details{
+  display:flex;gap:20px;padding-top:14px;border-top:1px solid var(--cream);
+}
+.property-details span{
+  font-size:0.85rem;color:var(--gray);
+  display:flex;align-items:center;gap:5px;
+}
+.property-details strong{color:var(--navy)}
+
+/* ===== WHY CHOOSE US ===== */
+.why-us{background:var(--white)}
+.features-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;
+  margin-top:50px;
+}
+.feature-card{
+  padding:36px 28px;
+  border-radius:var(--radius-lg);
+  background:var(--off-white);
+  transition:all var(--transition);
+  position:relative;
+  overflow:hidden;
+  transform:translateY(60px);opacity:0;
+}
+.feature-card.visible{transform:translateY(0);opacity:1}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gradient-gold);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform 0.6s ease;
+}
+.feature-card:hover::before{transform:scaleX(1)}
+.feature-card:hover{box-shadow:var(--shadow-md);transform:translateY(-6px) !important}
+.feature-icon{
+  width:56px;height:56px;
+  background:var(--gradient-gold);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.feature-card h3{
+  font-family:var(--font-heading);
+  font-size:1.2rem;margin-bottom:10px;
+}
+.feature-card p{color:var(--gray);font-size:0.92rem;line-height:1.7}
+
+/* ===== TEAM ===== */
+.team{background:var(--off-white)}
+.team-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;
+  margin-top:50px;
+}
+.team-card{
+  background:var(--white);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  text-align:center;
+  box-shadow:var(--shadow-sm);
+  transition:all var(--transition);
+  transform:translateY(60px);opacity:0;
+}
+.team-card.visible{transform:translateY(0);opacity:1}
+.team-card:hover{transform:translateY(-6px) !important;box-shadow:var(--shadow-md)}
+.team-avatar{
+  width:100%;height:280px;
+  background:var(--gradient-navy);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.team-avatar .initials{
+  font-family:var(--font-heading);
+  font-size:4rem;color:var(--gold);
+  font-weight:700;
+  z-index:1;
+}
+.team-avatar::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top, rgba(10,22,40,0.6), transparent);
+}
+.team-card-body{padding:28px}
+.team-card-body h3{
+  font-family:var(--font-heading);
+  font-size:1.3rem;margin-bottom:4px;
+}
+.team-role{
+  color:var(--gold);font-size:0.85rem;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;
+}
+.team-card-body p{
+  color:var(--gray);font-size:0.9rem;line-height:1.6;
+  margin-bottom:16px;
+}
+.team-socials{
+  display:flex;gap:12px;justify-content:center;
+}
+.team-socials a{
+  width:36px;height:36px;
+  border-radius:50%;
+  border:1px solid var(--gray-light);
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+  color:var(--gray);
+}
+.team-socials a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{
+  background:var(--navy);
+  position:relative;
+  overflow:hidden;
+}
+.testimonials::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.04) 0%, transparent 60%);
+}
+.testimonial-carousel{
+  max-width:700px;margin:50px auto 0;
+  position:relative;z-index:1;
+}
+.testimonial-slide{display:none;animation:fadeSlide 0.6s ease}
+.testimonial-slide.active{display:block}
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateX(30px)}
+  to{opacity:1;transform:translateX(0)}
+}
+.testimonial-content{
+  text-align:center;padding:0 20px;
+}
+.testimonial-stars{
+  color:var(--gold);font-size:1.3rem;margin-bottom:20px;
+  letter-spacing:4px;
+}
+.testimonial-text{
+  font-family:var(--font-heading);
+  font-size:clamp(1.1rem, 2vw, 1.5rem);
+  font-style:italic;
+  color:rgba(255,255,255,0.9);
+  line-height:1.7;margin-bottom:28px;
+}
+.testimonial-author{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+.testimonial-avatar{
+  width:56px;height:56px;
+  border-radius:50%;
+  background:var(--gradient-gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-heading);
+  font-weight:700;color:var(--navy);font-size:1.2rem;
+}
+.testimonial-info h4{
+  color:var(--white);font-size:1.05rem;
+}
+.testimonial-info span{
+  color:rgba(255,255,255,0.5);font-size:0.85rem;
+}
+.carousel-controls{
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  margin-top:32px;
+}
+.carousel-arrow{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all var(--transition);
+  color:var(--white);
+}
+.carousel-arrow:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.carousel-dots{display:flex;gap:8px}
+.carousel-dot{
+  width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,0.2);
+  cursor:pointer;transition:all var(--transition);
+  border:none;
+}
+.carousel-dot.active{background:var(--gold);width:28px;border-radius:5px}
+
+/* ===== CONTACT ===== */
+.contact{background:var(--white)}
+.contact-wrapper{
+  display:grid;grid-template-columns:1fr 0.7fr;gap:50px;
+  margin-top:50px;
+  align-items:start;
+}
+.contact-form{
+  background:var(--off-white);
+  padding:40px;border-radius:var(--radius-lg);
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-group{margin-bottom:16px}
+.form-group label{
+  display:block;font-size:0.85rem;font-weight:600;
+  margin-bottom:6px;color:var(--navy);
+}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:14px 16px;
+  border:1.5px solid var(--gray-light);
+  border-radius:var(--radius);
+  font-family:var(--font-body);
+  font-size:0.95rem;
+  transition:border-color var(--transition);
+  background:var(--white);
+  outline:none;
+}
+.form-group input:focus,.form-group textarea:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px var(--gold-glow);
+}
+.form-group textarea{height:120px;resize:vertical}
+.contact-sidebar{
+  background:var(--navy);
+  border-radius:var(--radius-lg);
+  padding:40px;
+  color:var(--white);
+  position:relative;overflow:hidden;
+}
+.contact-sidebar::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(201,168,76,0.1),transparent);
+  border-radius:50%;
+}
+.contact-sidebar h3{
+  font-family:var(--font-heading);
+  font-size:1.5rem;margin-bottom:24px;
+}
+.contact-detail{
+  display:flex;gap:16px;align-items:flex-start;
+  margin-bottom:24px;
+}
+.contact-detail-icon{
+  width:44px;height:44px;min-width:44px;
+  background:rgba(201,168,76,0.12);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold);
+}
+.contact-detail h4{font-size:0.95rem;margin-bottom:2px}
+.contact-detail p{color:rgba(255,255,255,0.6);font-size:0.88rem}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--navy);
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding:60px 0 30px;
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;
+  margin-bottom:40px;
+}
+.footer-brand .logo{margin-bottom:16px}
+.footer-brand p{
+  color:rgba(255,255,255,0.5);
+  font-size:0.9rem;line-height:1.7;
+  max-width:300px;
+}
+.footer-socials{
+  display:flex;gap:12px;margin-top:20px;
+}
+.footer-socials a{
+  width:40px;height:40px;
+  border-radius:50%;
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  transition:all var(--transition);
+  color:rgba(255,255,255,0.5);
+}
+.footer-socials a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.footer-col h4{
+  font-family:var(--font-heading);
+  color:var(--white);font-size:1.1rem;
+  margin-bottom:20px;
+}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:10px}
+.footer-col ul a{
+  color:rgba(255,255,255,0.5);
+  font-size:0.9rem;
+  transition:color var(--transition);
+}
+.footer-col ul a:hover{color:var(--gold)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.06);
+  padding-top:24px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{
+  color:rgba(255,255,255,0.35);
+  font-size:0.82rem;
+}
+.footer-bottom-links{display:flex;gap:20px}
+.footer-bottom-links a{
+  color:rgba(255,255,255,0.35);
+  font-size:0.82rem;transition:color var(--transition);
+}
+.footer-bottom-links a:hover{color:var(--gold)}
+
+/* ===== PARALLAX BANNER ===== */
+.parallax-banner{
+  position:relative;
+  padding:100px 0;
+  background:var(--gradient-navy);
+  overflow:hidden;
+  text-align:center;
+}
+.parallax-banner::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' opacity='0.04'%3E%3Crect width='100' height='100' fill='none'/%3E%3Cpath d='M0 50 L100 50 M50 0 L50 100' stroke='%23c9a84c' stroke-width='0.5'/%3E%3C/svg%3E") repeat;
+  background-size:60px 60px;
+  transform:translateY(0);
+  transition:transform 0.1s ease;
+}
+.parallax-content{position:relative;z-index:1}
+.parallax-content h2{
+  font-family:var(--font-heading);
+  font-size:clamp(2rem,4vw,3rem);
+  color:var(--white);margin-bottom:16px;
+}
+.parallax-content p{
+  color:rgba(255,255,255,0.6);
+  max-width:500px;margin:0 auto 32px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:992px){
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .contact-wrapper{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .section{padding:70px 0}
+  .hero-title{font-size:clamp(2rem,6vw,3rem)}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr;text-align:center}
+  .footer-brand p{margin:0 auto}
+  .footer-socials{justify-content:center}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-form{padding:24px}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr;gap:30px}
+  .hero-buttons{flex-direction:column;align-items:center}
+  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .properties-grid{grid-template-columns:1fr}
+  .team-grid{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+}
+@media(max-width:320px){
+  .container{padding:0 16px}
+  .hero-title{font-size:1.6rem}
+  .logo{font-size:1.2rem}
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:8px}
+::-webkit-scrollbar-track{background:var(--navy)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:4px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-light)}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-ring"></div>
+  <div class="loader-text">LuxVista</div>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container">
+    <a href="#hero" class="logo">
+      <div class="logo-icon">L</div>
+      <span>LuxVista</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#properties">Properties</a></li>
+      <li><a href="#why-us">Why Us</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Book a Viewing</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE OVERLAY -->
+<div class="mobile-overlay" id="mobileOverlay">
+  <a href="#properties" class="mobile-link">Properties</a>
+  <a href="#why-us" class="mobile-link">Why Us</a>
+  <a href="#team" class="mobile-link">Team</a>
+  <a href="#testimonials" class="mobile-link">Testimonials</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#contact" class="nav-cta" style="color:var(--navy) !important">Book a Viewing</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">&#9733; Premier Luxury Real Estate</div>
+    <h1 class="hero-title">Where <span class="highlight">Luxury</span> Meets Location</h1>
+    <p class="hero-sub">Exclusive properties in the world's most coveted destinations. Curated for those who demand the extraordinary.</p>
+    <div class="hero-buttons">
+      <a href="#properties" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Explore Properties
+      </a>
+      <a href="#contact" class="btn-secondary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Book a Viewing
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-target="500">0<span class="stat-plus">+</span></div>
+        <div class="stat-label">Properties Sold</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="15">0<span class="stat-plus">+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="2000">0<span class="stat-plus">+</span></div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="50">0<span class="stat-plus">+</span></div>
+        <div class="stat-label">Awards Won</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROPERTIES -->
+<section class="section featured" id="properties">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:12px">
+      <span class="section-label">&#9733; Featured Properties</span>
+      <h2 class="section-title">Exclusive <span class="highlight">Listings</span></h2>
+      <p class="section-desc" style="margin:0 auto">Hand-picked estates that redefine luxury living across prime global locations.</p>
+    </div>
+    <div class="properties-grid">
+      <div class="property-card reveal">
+        <div class="property-img" style="background:linear-gradient(135deg,#1a2d4a,#0a1628)">
+          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
+            <rect width="400" height="240" fill="none"/>
+            <path d="M0 180 Q100 140 200 160 T400 140 L400 240 L0 240 Z" fill="rgba(201,168,76,0.15)"/>
+            <rect x="80" y="80" width="60" height="50" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="150" y="60" width="60" height="70" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="220" y="90" width="60" height="40" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="290" y="70" width="50" height="60" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="350" cy="50" r="20" fill="rgba(201,168,76,0.1)"/>
+          </svg>
+          <span class="property-badge">&#9733; Featured</span>
+          <span class="property-price">$4.8M</span>
+        </div>
+        <div class="property-info">
+          <h3>Coastal Mediterranean Villa</h3>
+          <div class="property-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Malibu, California
+          </div>
+          <div class="property-details">
+            <span><strong>6</strong> Bed</span>
+            <span><strong>8</strong> Bath</span>
+            <span><strong>7,200</strong> sq.ft</span>
+          </div>
+        </div>
+      </div>
+      <div class="property-card reveal">
+        <div class="property-img" style="background:linear-gradient(135deg,#0a1628,#132244)">
+          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
+            <rect width="400" height="240" fill="none"/>
+            <path d="M0 160 Q100 130 200 150 T400 120 L400 240 L0 240 Z" fill="rgba(201,168,76,0.15)"/>
+            <rect x="60" y="70" width="80" height="60" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="160" y="50" width="80" height="80" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="260" y="80" width="70" height="50" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="320" cy="40" r="25" fill="rgba(201,168,76,0.08)"/>
+          </svg>
+          <span class="property-badge">Just Listed</span>
+          <span class="property-price">$8.2M</span>
+        </div>
+        <div class="property-info">
+          <h3>Penthouse Sky Residence</h3>
+          <div class="property-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Manhattan, New York
+          </div>
+          <div class="property-details">
+            <span><strong>5</strong> Bed</span>
+            <span><strong>6</strong> Bath</span>
+            <span><strong>5,800</strong> sq.ft</span>
+          </div>
+        </div>
+      </div>
+      <div class="property-card reveal">
+        <div class="property-img" style="background:linear-gradient(135deg,#132244,#1a2d4a)">
+          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
+            <rect width="400" height="240" fill="none"/>
+            <path d="M0 170 Q120 140 240 160 T400 130 L400 240 L0 240 Z" fill="rgba(201,168,76,0.12)"/>
+            <rect x="50" y="90" width="70" height="45" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="140" y="70" width="70" height="65" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="230" y="85" width="70" height="50" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="320" y="60" width="50" height="75" rx="3" fill="rgba(255,255,255,0.08)"/>
+          </svg>
+          <span class="property-badge">&#9733; Premium</span>
+          <span class="property-price">$6.5M</span>
+        </div>
+        <div class="property-info">
+          <h3>Beverly Hills Estate</h3>
+          <div class="property-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Beverly Hills, CA
+          </div>
+          <div class="property-details">
+            <span><strong>7</strong> Bed</span>
+            <span><strong>9</strong> Bath</span>
+            <span><strong>10,200</strong> sq.ft</span>
+          </div>
+        </div>
+      </div>
+      <div class="property-card reveal">
+        <div class="property-img" style="background:linear-gradient(135deg,#1a2d4a,#0a1628)">
+          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
+            <rect width="400" height="240" fill="none"/>
+            <path d="M0 150 Q100 120 200 140 T400 110 L400 240 L0 240 Z" fill="rgba(201,168,76,0.15)"/>
+            <rect x="70" y="60" width="55" height="55" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="140" y="50" width="55" height="65" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="210" y="75" width="55" height="40" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <rect x="280" y="55" width="55" height="60" rx="3" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="370" cy="45" r="18" fill="rgba(201,168,76,0.08)"/>
+          </svg>
+          <span class="property-badge">Exclusive</span>
+          <span class="property-price">$12.5M</span>
+        </div>
+        <div class="property-info">
+          <h3>Waterfront Modern Mansion</h3>
+          <div class="property-location">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Miami Beach, Florida
+          </div>
+          <div class="property-details">
+            <span><strong>8</strong> Bed</span>
+            <span><strong>10</strong> Bath</span>
+            <span><strong>12,500</strong> sq.ft</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX BANNER 1 -->
+<div class="parallax-banner" id="parallax1">
+  <div class="parallax-content">
+    <h2>Curating <span class="highlight">Exceptional</span> Living Experiences</h2>
+    <p>Every property we represent tells a story of architectural brilliance and uncompromising quality.</p>
+    <a href="#contact" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Schedule a Consultation
+    </a>
+  </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="section why-us" id="why-us">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:12px">
+      <span class="section-label">&#10003; Why Choose Us</span>
+      <h2 class="section-title">The <span class="highlight">LuxVista</span> Difference</h2>
+      <p class="section-desc" style="margin:0 auto">Decades of expertise, a global network, and an unwavering commitment to excellence set us apart.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Prime Global Locations</h3>
+        <p>Portfolio spanning the most sought-after addresses across five continents, from coastal retreats to urban penthouses.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <h3>White-Glove Service</h3>
+        <p>Concierge-level attention from first consultation to final closing and beyond. Your privacy and preferences are paramount.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Market Intelligence</h3>
+        <p>Data-driven insights and proprietary analytics ensure every investment decision is backed by precision research.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Unmatched Reputation</h3>
+        <p>50+ industry awards and a legacy of trust built over 15 years serving discerning clients worldwide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="section team" id="team">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:12px">
+      <span class="section-label">&#9733; Our Team</span>
+      <h2 class="section-title">Meet the <span class="highlight">Experts</span></h2>
+      <p class="section-desc" style="margin:0 auto">Dedicated professionals committed to delivering extraordinary results for every client.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">
+          <div class="initials">IC</div>
+        </div>
+        <div class="team-card-body">
+          <h3>Isabella Carrington</h3>
+          <div class="team-role">Founder &amp; CEO</div>
+          <p>15+ years in luxury real estate. Former architect with a passion for exceptional design.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 0 1-2.825.775 4.958 4.958 0 0 0 2.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 0 0-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 0 0-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 0 1-2.228-.616v.06a4.923 4.923 0 0 0 3.946 4.827 4.996 4.996 0 0 1-2.212.085 4.936 4.936 0 0 0 4.604 3.417 9.867 9.867 0 0 1-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0 0 7.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0 0 24 4.59z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">
+          <div class="initials">JM</div>
+        </div>
+        <div class="team-card-body">
+          <h3>James Montgomery</h3>
+          <div class="team-role">Head of Sales</div>
+          <p>Top 1% producer nationwide. Known for negotiating record-breaking deals with discretion.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 0 1-2.825.775 4.958 4.958 0 0 0 2.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 0 0-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 0 0-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 0 1-2.228-.616v.06a4.923 4.923 0 0 0 3.946 4.827 4.996 4.996 0 0 1-2.212.085 4.936 4.936 0 0 0 4.604 3.417 9.867 9.867 0 0 1-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0 0 7.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0 0 24 4.59z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">
+          <div class="initials">SV</div>
+        </div>
+        <div class="team-card-body">
+          <h3>Sofia Vasquez</h3>
+          <div class="team-role">Director of Client Relations</div>
+          <p>Multilingual luxury concierge with a decade of experience serving UHNW individuals.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" aria-label="Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 0 1-2.825.775 4.958 4.958 0 0 0 2.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 0 0-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 0 0-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 0 1-2.228-.616v.06a4.923 4.923 0 0 0 3.946 4.827 4.996 4.996 0 0 1-2.212.085 4.936 4.936 0 0 0 4.604 3.417 9.867 9.867 0 0 1-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0 0 7.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0 0 24 4.59z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials" id="testimonials">
+  <div class="container">
+    <div style="text-align:center;position:relative;z-index:1">
+      <span class="section-label" style="color:var(--gold-light)">&#9733; Testimonials</span>
+      <h2 class="section-title" style="color:var(--white)">What Our <span class="highlight">Clients</span> Say</h2>
+    </div>
+    <div class="testimonial-carousel">
+      <div class="testimonial-slide active">
+        <div class="testimonial-content">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">"LuxVista exceeded every expectation. Their team found us a breathtaking oceanfront estate that wasn't even on the market yet. The entire process was seamless and discreet — exactly what we needed."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RH</div>
+            <div class="testimonial-info">
+              <h4>Richard &amp; Helena Whitmore</h4>
+              <span>Palm Beach, Florida</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">"As an international buyer, I was nervous about the complexities of purchasing property abroad. The LuxVista team handled everything — legal, logistics, renovations — with absolute professionalism."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AK</div>
+            <div class="testimonial-info">
+              <h4>Amira Khalil</h4>
+              <span>Dubai / London</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">"We sold our Manhattan penthouse through LuxVista in under three weeks, achieving 12% above our asking price. Their market knowledge and network of qualified buyers are unmatched."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MD</div>
+            <div class="testimonial-info">
+              <h4>Marcus DeLuca</h4>
+              <span>New York City</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial-content">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="testimonial-text">"From our first meeting to closing day, the level of attention to detail was extraordinary. LuxVista doesn't just sell homes — they curate lifestyles. We are clients for life."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JC</div>
+            <div class="testimonial-info">
+              <h4>Jennifer &amp; Christopher Lane</h4>
+              <span>San Francisco, CA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-arrow" id="prevArrow" aria-label="Previous">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-arrow" id="nextArrow" aria-label="Next">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:12px">
+      <span class="section-label">&#9993; Get in Touch</span>
+      <h2 class="section-title">Begin Your <span class="highlight">Journey</span></h2>
+      <p class="section-desc" style="margin:0 auto">Ready to explore exceptional properties? Reach out and let us curate your perfect experience.</p>
+    </div>
+    <div class="contact-wrapper">
+      <form class="contact-form" id="contactForm" onsubmit="return handleForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="interest">I'm interested in</label>
+          <select id="interest">
+            <option value="">Select an option...</option>
+            <option>Buying a Property</option>
+            <option>Selling a Property</option>
+            <option>Investment Consultation</option>
+            <option>Private Viewing</option>
+            <option>Other Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us about your vision..." required></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;justify-content:center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Send Message
+        </button>
+      </form>
+      <div class="contact-sidebar">
+        <h3>Contact Information</h3>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <h4>Headquarters</h4>
+            <p>1 Luxury Row, Suite 400<br>Beverly Hills, CA 90210</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <h4>Phone</h4>
+            <p>+1 (310) 555-0199</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a59555459535f485d5f7a564f424c53494e5b485f5b564e4314595557">[email&#160;protected]</a></p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <h4>Office Hours</h4>
+            <p>Mon–Sat: 9 AM – 8 PM<br>Sunday: By Appointment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARALLAX BANNER 2 -->
+<div class="parallax-banner" id="parallax2">
+  <div class="parallax-content">
+    <h2>Ready to Find Your <span class="highlight">Dream Estate</span>?</h2>
+    <p>Join the ranks of discerning homeowners who trust LuxVista with their most important investments.</p>
+    <a href="#contact" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Book a Private Viewing
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#hero" class="logo">
+          <div class="logo-icon">L</div>
+          <span>LuxVista</span>
+        </a>
+        <p>Redefining luxury real estate with unparalleled service, global reach, and an unwavering commitment to excellence since 2010.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 0 1-2.825.775 4.958 4.958 0 0 0 2.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 0 0-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 0 0-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 0 1-2.228-.616v.06a4.923 4.923 0 0 0 3.946 4.827 4.996 4.996 0 0 1-2.212.085 4.936 4.936 0 0 0 4.604 3.417 9.867 9.867 0 0 1-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 0 0 7.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0 0 24 4.59z"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#properties">Properties</a></li>
+          <li><a href="#why-us">Why Us</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Property Types</h4>
+        <ul>
+          <li><a href="#">Waterfront Estates</a></li>
+          <li><a href="#">City Penthouses</a></li>
+          <li><a href="#">Vineyard Retreats</a></li>
+          <li><a href="#">Ski Chalets</a></li>
+          <li><a href="#">Private Islands</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="#">Beverly Hills</a></li>
+          <li><a href="#">Manhattan</a></li>
+          <li><a href="#">Miami Beach</a></li>
+          <li><a href="#">Lake Como</a></li>
+          <li><a href="#">Saint-Tropez</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 LuxVista Realty. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ===== LOADER =====
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
+});
+
+// ===== PARTICLES =====
+(function createParticles(){
+  const container = document.getElementById('particles');
+  for(let i = 0; i < 30; i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 8 + 's';
+    p.style.animationDuration = (6 + Math.random() * 6) + 's';
+    p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+    container.appendChild(p);
+  }
+})();
+
+// ===== STICKY NAV =====
+const navbar = document.getElementById('navbar');
+const hero = document.getElementById('hero');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if(scrollY > 80){
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+  lastScroll = scrollY;
+});
+
+// ===== SMOOTH SCROLL NAV (mobile) =====
+document.querySelectorAll('.mobile-link, .nav-links a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if(href && href.startsWith('#')){
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if(target){
+        target.scrollIntoView({behavior:'smooth'});
+      }
+      closeMobileMenu();
+    }
+  });
+});
+
+// ===== MOBILE HAMBURGER =====
+const hamburger = document.getElementById('hamburger');
+const mobileOverlay = document.getElementById('mobileOverlay');
+
+function toggleMobileMenu(){
+  hamburger.classList.toggle('active');
+  mobileOverlay.classList.toggle('open');
+  document.body.style.overflow = mobileOverlay.classList.contains('open') ? 'hidden' : '';
+}
+
+function closeMobileMenu(){
+  hamburger.classList.remove('active');
+  mobileOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', toggleMobileMenu);
+
+// ===== INTERSECTION OBSERVER (Reveal animations) =====
+const revealElements = document.querySelectorAll('.reveal');
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -50px 0px' };
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+revealElements.forEach(el => observer.observe(el));
+
+// ===== ANIMATED COUNTERS =====
+const statNumbers = document.querySelectorAll('.stat-number');
+let countersStarted = false;
+
+function animateCounters(){
+  if(countersStarted) return;
+  countersStarted = true;
+  statNumbers.forEach(el => {
+    const target = parseInt(el.dataset.target);
+    const numSpan = el.childNodes[0];
+    const duration = 2000;
+    const startTime = performance.now();
+
+    function update(currentTime){
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const current = Math.floor(easeOut * target);
+      numSpan.textContent = current;
+      if(progress < 1) requestAnimationFrame(update);
+      else numSpan.textContent = target;
+    }
+    requestAnimationFrame(update);
+  });
+}
+
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      animateCounters();
+      statsObserver.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+
+const statsSection = document.getElementById('stats');
+if(statsSection) statsObserver.observe(statsSection);
+
+// ===== TESTIMONIAL CAROUSEL =====
+const slides = document.querySelectorAll('.testimonial-slide');
+const dotsContainer = document.getElementById('carouselDots');
+const prevBtn = document.getElementById('prevArrow');
+const nextBtn = document.getElementById('nextArrow');
+let currentSlide = 0;
+let autoSlideInterval;
+
+// Create dots
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+  dot.setAttribute('aria-label', 'Go to slide ' + (i+1));
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+});
+
+function goToSlide(index){
+  slides.forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.carousel-dot').forEach(d => d.classList.remove('active'));
+  currentSlide = (index + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dotsContainer.children[currentSlide].classList.add('active');
+  resetAutoSlide();
+}
+
+function nextSlide(){ goToSlide(currentSlide + 1); }
+function prevSlide(){ goToSlide(currentSlide - 1); }
+
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+function resetAutoSlide(){
+  clearInterval(autoSlideInterval);
+  autoSlideInterval = setInterval(nextSlide, 5000);
+}
+autoSlideInterval = setInterval(nextSlide, 5000);
+
+// Pause on hover
+const carousel = document.querySelector('.testimonial-carousel');
+carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+carousel.addEventListener('mouseleave', resetAutoSlide);
+
+// ===== CONTACT FORM =====
+function handleForm(e){
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const originalText = btn.innerHTML;
+  btn.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    Message Sent!
+  `;
+  btn.style.background = 'linear-gradient(135deg,#2d7d46,#1a5c32)';
+  setTimeout(() => {
+    btn.innerHTML = originalText;
+    btn.style.background = '';
+    e.target.reset();
+  }, 3000);
+  return false;
+}
+
+// ===== PARALLAX SCROLL EFFECT =====
+const parallaxBanners = document.querySelectorAll('.parallax-banner');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  parallaxBanners.forEach(banner => {
+    const rect = banner.getBoundingClientRect();
+    const offset = rect.top;
+    const speed = 0.15;
+    banner.querySelector('::before');
+    // Parallax via transform on the pseudo element isn't directly controllable,
+    // so we apply a subtle transform on the whole banner
+    if(offset < window.innerHeight && offset > -banner.offsetHeight){
+      const yPos = offset * speed;
+      banner.style.backgroundPositionY = yPos + 'px';
+    }
+  });
+});
+
+// ===== ACTIVE NAV LINK HIGHLIGHT =====
+const sections = document.querySelectorAll('section[id], .stats[id], .parallax-banner[id]');
+const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 200;
+    if(window.scrollY >= top){
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
+  });
+});
+
+console.log('%c LuxVista Realty v1.0 ', 'background:#0a1628;color:#c9a84c;font-size:14px;font-weight:bold;padding:8px 12px;border-radius:4px;');
+console.log('%c Premium Luxury Real Estate Landing Page ', 'background:#c9a84c;color:#0a1628;font-size:12px;padding:4px 10px;border-radius:4px;');
+</script>
+</body>
+</html>

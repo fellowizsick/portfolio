@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ProCoat Painters – Professional Interior &amp; Exterior Painting</title>
+    <meta name="description" content="Premium quality paint jobs that last. Free estimates. Fully insured. Trusted by 200+ homeowners." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #1a2744;
+            --navy-light: #243356;
+            --orange: #e87a2e;
+            --orange-light: #f08e42;
+            --orange-dark: #cf6a1e;
+            --white: #ffffff;
+            --off-white: #f8f9fc;
+            --gray-50: #f1f3f8;
+            --gray-100: #e2e6ee;
+            --gray-200: #c8ceda;
+            --gray-400: #7a8599;
+            --gray-500: #5a6577;
+            --gray-600: #3d4757;
+            --gray-700: #2a3342;
+            --text: #1a1f2e;
+            --radius: 12px;
+            --shadow-sm: 0 2px 8px rgba(26, 39, 68, 0.06);
+            --shadow-md: 0 8px 30px rgba(26, 39, 68, 0.10);
+            --shadow-lg: 0 20px 60px rgba(26, 39, 68, 0.15);
+            --max-width: 1200px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+                   BUTTONS
+                   ============================================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 16px 36px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.01em;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+            box-shadow: 0 4px 16px rgba(232, 122, 46, 0.35);
+        }
+        .btn-primary:hover {
+            background: var(--orange-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(232, 122, 46, 0.45);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(232, 122, 46, 0.30);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .btn-secondary {
+            background: var(--navy);
+            color: var(--white);
+        }
+        .btn-secondary:hover {
+            background: var(--navy-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ============================================================
+                   NAVIGATION
+                   ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: var(--transition);
+        }
+
+        .nav.scrolled {
+            background: rgba(26, 39, 68, 0.97);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 10px 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+        .nav-logo span {
+            color: var(--orange);
+        }
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            color: var(--white);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            font-size: 0.9rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* ============================================================
+                   HERO
+                   ============================================================ */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(26, 39, 68, 0.88) 0%, rgba(26, 39, 68, 0.70) 50%, rgba(26, 39, 68, 0.85) 100%),
+                url('https://images.pexels.com/photos/1587212/pexels-photo-1587212.jpeg?auto=compress&cs=tinysrgb&w=1600')
+                center center / cover no-repeat;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, var(--navy) 100%);
+            opacity: 0.15;
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 28px;
+        }
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+            font-weight: 700;
+            line-height: 1.12;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--orange);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 580px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-social-proof {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .hero-avatars {
+            display: flex;
+        }
+        .hero-avatars div {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--navy);
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            margin-right: -10px;
+            background-size: cover;
+        }
+        .hero-avatars div:nth-child(1) { background: #e8d5c4; color: #6b4c3b; }
+        .hero-avatars div:nth-child(2) { background: #c4d9e8; color: #2c5a7a; }
+        .hero-avatars div:nth-child(3) { background: #d4c4e8; color: #5a3b7a; }
+        .hero-avatars div:nth-child(4) { background: #c4e8d5; color: #2a6b4a; }
+
+        .hero-social-proof p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+        .hero-social-proof strong {
+            color: var(--white);
+        }
+
+        /* ============================================================
+                   SECTION COMMON
+                   ============================================================ */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--orange);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-sub {
+            font-size: 1.1rem;
+            color: var(--gray-500);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .section-header .section-sub {
+            margin: 0 auto;
+        }
+
+        /* ============================================================
+                   SERVICES
+                   ============================================================ */
+        #services {
+            background: var(--off-white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 28px 36px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--gray-100);
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--orange);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: rgba(232, 122, 46, 0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+        .service-card:hover .service-icon {
+            background: var(--orange);
+        }
+        .service-card:hover .service-icon span {
+            filter: brightness(0) invert(1);
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--gray-500);
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+                   BEFORE / AFTER GALLERY
+                   ============================================================ */
+        #gallery {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-md);
+        }
+
+        .gallery-img {
+            height: 340px;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            position: relative;
+        }
+        .gallery-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .gallery-img .label {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 6px 14px;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .gallery-before { background: linear-gradient(135deg, #8b7355, #6b5b45); }
+        .gallery-after  { background: linear-gradient(135deg, #5a7a5a, #3d5a3d); }
+        .gallery-living { background: linear-gradient(135deg, #b8a088, #8a7a6a); }
+        .gallery-kitchen { background: linear-gradient(135deg, #7a8a9a, #5a6a7a); }
+        .gallery-exterior { background: linear-gradient(135deg, #6a7a8a, #4a5a6a); }
+        .gallery-bathroom { background: linear-gradient(135deg, #9a8a7a, #7a6a5a); }
+
+        .gallery-caption {
+            padding: 16px 20px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--navy);
+            border-top: 1px solid var(--gray-100);
+        }
+
+        /* ============================================================
+                   WHY CHOOSE US
+                   ============================================================ */
+        #why-us {
+            background: var(--navy);
+        }
+
+        #why-us .section-label { color: var(--orange); }
+        #why-us .section-title { color: var(--white); }
+        #why-us .section-sub { color: rgba(255, 255, 255, 0.7); }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .why-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: var(--transition);
+            text-align: center;
+        }
+        .why-card:hover {
+            background: rgba(255, 255, 255, 0.10);
+            border-color: rgba(232, 122, 46, 0.40);
+            transform: translateY(-4px);
+        }
+
+        .why-icon {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .why-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.65);
+            line-height: 1.7;
+        }
+
+        /* ============================================================
+                   TESTIMONIALS
+                   ============================================================ */
+        #testimonials {
+            background: var(--off-white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 36px 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+            transition: var(--transition);
+        }
+        .testimonial-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-stars {
+            color: var(--orange);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .testimonial-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+        .testimonial-avatar.a1 { background: linear-gradient(135deg, #e87a2e, #cf6a1e); }
+        .testimonial-avatar.a2 { background: linear-gradient(135deg, #1a2744, #243356); }
+        .testimonial-avatar.a3 { background: linear-gradient(135deg, #2a7a5a, #1d5a3f); }
+
+        .testimonial-name {
+            font-weight: 600;
+            color: var(--navy);
+            font-size: 1rem;
+        }
+        .testimonial-location {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+
+        /* ============================================================
+                   QUOTE FORM
+                   ============================================================ */
+        #quote {
+            background: var(--white);
+        }
+
+        .form-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--off-white);
+            border-radius: var(--radius);
+            padding: 56px 48px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-100);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 14px 16px;
+            border: 2px solid var(--gray-100);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--text);
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--orange);
+            box-shadow: 0 0 0 4px rgba(232, 122, 46, 0.10);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            width: 100%;
+            justify-content: center;
+            margin-top: 8px;
+            font-size: 1.05rem;
+            padding: 18px 36px;
+        }
+
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
+        footer {
+            background: var(--navy);
+            color: var(--white);
+            padding: 60px 0 32px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .footer-brand h3 span {
+            color: var(--orange);
+        }
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 320px;
+        }
+
+        .footer-col h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--white);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul a,
+        .footer-col ul span {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .footer-col ul a:hover {
+            color: var(--orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+                   MOBILE RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 72px 0; }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--navy);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 32px 32px;
+                gap: 24px;
+                transition: var(--transition);
+                box-shadow: -4px 0 30px rgba(0,0,0,0.25);
+                z-index: 999;
+            }
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-toggle {
+                display: flex;
+                position: relative;
+                z-index: 1001;
+            }
+            .nav-toggle.open span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+            .nav-toggle.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .nav-toggle.open span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.05rem; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .hero-actions .btn { justify-content: center; }
+
+            .services-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .why-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+
+            .form-wrapper {
+                padding: 36px 24px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 16px; }
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.7rem; }
+            .btn { padding: 14px 28px; font-size: 0.95rem; }
+        }
+
+        /* ============================================================
+                   MOBILE OVERLAY
+                   ============================================================ */
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .nav-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============ NAVIGATION ============ -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">PC</div>
+                Pro<span>Coat</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#quote" class="btn btn-primary nav-cta">Free Quote</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- ============ HERO ============ -->
+    <header class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    Rated 4.9 ★ by our customers
+                </div>
+                <h1>Transform Your Home.<br/><span>Professional Interior &amp; Exterior Painting</span></h1>
+                <p>Premium quality paint jobs that last. Free estimates. Fully insured. We bring your vision to life with meticulous attention to detail.</p>
+                <div class="hero-actions">
+                    <a href="#quote" class="btn btn-primary">Get a Free Quote</a>
+                    <a href="#gallery" class="btn btn-outline">See Our Work</a>
+                </div>
+                <div class="hero-social-proof">
+                    <div class="hero-avatars">
+                        <div>SM</div>
+                        <div>AK</div>
+                        <div>JR</div>
+                        <div>+</div>
+                    </div>
+                    <p>Trusted by <strong>200+ homeowners</strong> across the region</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============ SERVICES ============ -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Our Services</span>
+                <h2 class="section-title">Professional Painting Services</h2>
+                <p class="section-sub">From single rooms to whole properties, we deliver flawless finishes that stand the test of time.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><span>🏠</span></div>
+                    <h3>Interior Painting</h3>
+                    <p>Transform your living spaces with premium interior painting. Walls, ceilings, trim &amp; more — pristine results, zero mess.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><span>🏡</span></div>
+                    <h3>Exterior Painting</h3>
+                    <p>Curb appeal that lasts. Weather-resistant coatings, power washing prep, and expert application for a beautiful, durable finish.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><span>🏢</span></div>
+                    <h3>Commercial Painting</h3>
+                    <p>Offices, retail spaces, and industrial facilities. Minimal downtime, maximum quality. Fully licensed and insured for commercial work.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><span>🪵</span></div>
+                    <h3>Cabinet Refinishing</h3>
+                    <p>Breathe new life into your kitchen or bathroom cabinets. Professional sanding, priming &amp; spraying for a factory-quality finish.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ BEFORE / AFTER GALLERY ============ -->
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Before &amp; After</span>
+                <h2 class="section-title">Real Results. Real Transformations.</h2>
+                <p class="section-sub">Every project tells a story. Here are a few of our favorites — from drab to dazzling.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-img gallery-living">
+                        <span class="label">🔄 Before</span>
+                    </div>
+                    <div class="gallery-caption">Living room refresh — dated beige to warm greige</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img gallery-after">
+                        <span class="label">✨ After</span>
+                    </div>
+                    <div class="gallery-caption">Same space, transformed with soft neutral tones</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img gallery-kitchen">
+                        <span class="label">🔄 Before</span>
+                    </div>
+                    <div class="gallery-caption">Kitchen cabinets — worn oak ready for renewal</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img gallery-bathroom">
+                        <span class="label">✨ After</span>
+                    </div>
+                    <div class="gallery-caption">Cabinet refinishing — sleek matte navy finish</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img gallery-exterior">
+                        <span class="label">🔄 Before</span>
+                    </div>
+                    <div class="gallery-caption">Exterior — faded paint, peeling trim</div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-img gallery-before">
+                        <span class="label">✨ After</span>
+                    </div>
+                    <div class="gallery-caption">Complete exterior makeover — bold &amp; beautiful</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ WHY CHOOSE US ============ -->
+    <section id="why-us">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Why ProCoat</span>
+                <h2 class="section-title">Why Choose Us</h2>
+                <p class="section-sub">We don't just paint — we elevate your space with craftsmanship, care, and accountability.</p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <span class="why-icon">📅</span>
+                    <h3>10+ Years Experience</h3>
+                    <p>Over a decade of hands-on expertise in residential and commercial painting.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">🎨</span>
+                    <h3>Premium Materials</h3>
+                    <p>We use only top-tier paints (Sherwin-Williams, Benjamin Moore) and professional-grade tools.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">🛡️</span>
+                    <h3>Fully Insured</h3>
+                    <p>Full liability insurance and workers' compensation — your peace of mind is our priority.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">🧹</span>
+                    <h3>Clean &amp; Respectful</h3>
+                    <p>We treat your home like our own. Drop cloths, tape, and a thorough clean-up every single day.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">⏰</span>
+                    <h3>On Time &amp; On Budget</h3>
+                    <p>We respect your schedule and your budget. Clear timelines, no surprises, honest communication.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">✅</span>
+                    <h3>Satisfaction Guaranteed</h3>
+                    <p>If you're not 100% happy, we make it right. No questions asked. That's our promise.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-sub">Real feedback from real homeowners we've had the pleasure of serving.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"ProCoat transformed our entire main floor. The crew was punctual, polite, and incredibly detail-oriented. Our living room has never looked better. We're already booking them for the exterior."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar a1">SM</div>
+                        <div>
+                            <div class="testimonial-name">Sarah Mitchell</div>
+                            <div class="testimonial-location">Maplewood, NJ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"We hired ProCoat to paint the exterior of our 1920s colonial. They power-washed, scraped, primed, and applied two coats — the finish is flawless. So many compliments from neighbours!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar a2">DK</div>
+                        <div>
+                            <div class="testimonial-name">David &amp; Karen Lee</div>
+                            <div class="testimonial-location">Westfield, NJ</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The cabinet refinishing team did an outstanding job on our outdated kitchen. They look brand new — like a high-end remodel for a fraction of the cost. Highly recommend ProCoat."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar a3">JR</div>
+                        <div>
+                            <div class="testimonial-name">James Rodriguez</div>
+                            <div class="testimonial-location">Summit, NJ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ QUOTE FORM ============ -->
+    <section id="quote">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Get Started</span>
+                <h2 class="section-title">Request a Free Quote</h2>
+                <p class="section-sub">Tell us about your project and we'll get back to you within 24 hours with a detailed, no-obligation estimate.</p>
+            </div>
+            <div class="form-wrapper">
+                <form id="quoteForm" action="#" method="post">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" placeholder="John Smith" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+                        </div>
+                        <div class="form-group">
+                            <label for="project-type">Project Type *</label>
+                            <select id="project-type" name="project-type" required>
+                                <option value="">Select a service...</option>
+                                <option value="interior">Interior Painting</option>
+                                <option value="exterior">Exterior Painting</option>
+                                <option value="commercial">Commercial Painting</option>
+                                <option value="cabinet">Cabinet Refinishing</option>
+                                <option value="other">Other / Not Sure</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell Us About Your Project</label>
+                        <textarea id="message" name="message" placeholder="Approximate size, rooms, desired colors, timeline..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit">Get My Free Quote</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Pro<span>Coat</span></h3>
+                    <p>Premium interior &amp; exterior painting services. Quality craftsmanship, professional results, and complete customer satisfaction — every time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+15551234567">(555) 123-4567</a></li>
+                        <li><a href="/cdn-cgi/l/email-protection#cca5a2aaa38cbcbea3afa3adb8bcada5a2b8a9bebfe2afa3a1"><span class="__cf_email__" data-cfemail="650c0b030a2515170a060a041115040c0b110017164b060a08">[email&#160;protected]</span></a></li>
+                        <li><span>Mon–Fri: 7:00 AM – 6:00 PM</span></li>
+                        <li><span>Sat: 8:00 AM – 3:00 PM</span></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Interior Painting</a></li>
+                        <li><a href="#services">Exterior Painting</a></li>
+                        <li><a href="#services">Commercial Painting</a></li>
+                        <li><a href="#services">Cabinet Refinishing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#why-us">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#quote">Get a Quote</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ProCoat Painters. All rights reserved.</p>
+                <p>Fully Licensed &bull; Insured &bull; Bonded</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // ---- Nav scroll effect ----
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            if (scrollY > 60) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            lastScroll = scrollY;
+        });
+
+        // ---- Mobile nav toggle ----
+        const toggleBtn = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            toggleBtn.classList.remove('open');
+            navOverlay.classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        function openMenu() {
+            navLinks.classList.add('open');
+            toggleBtn.classList.add('open');
+            navOverlay.classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            if (navLinks.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        navOverlay.addEventListener('click', closeMenu);
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // ---- Smooth close on Escape ----
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenu();
+        });
+
+        // ---- Form submission handler (demo) ----
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Sending...';
+            btn.disabled = true;
+            btn.style.background = '#2a7a5a';
+            btn.style.boxShadow = 'none';
+
+            setTimeout(() => {
+                btn.textContent = '✓ Quote Requested — We\'ll Be in Touch!';
+                btn.style.background = '#1d5a3f';
+
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    btn.style.background = '';
+                    btn.style.boxShadow = '';
+                    this.reset();
+                }, 4000);
+            }, 1200);
+        });
+
+        // ---- Close nav on resize to desktop ----
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) closeMenu();
+        });
+    </script>
+</body>
+</html>

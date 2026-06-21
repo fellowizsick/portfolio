@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudForge — DevOps Platform for Modern Teams</title>
+<meta name="description" content="CloudForge is the all-in-one DevOps platform that lets you build, deploy, and monitor at scale. Trusted by 10,000+ engineering teams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg-deep:#0a0a1a;
+  --bg-mid:#12122a;
+  --bg-card:#1a1a2e;
+  --bg-nav:rgba(10,10,26,0.92);
+  --cyan:#00d4ff;
+  --purple:#7c3aed;
+  --purple-glow:#8b5cf6;
+  --white:#f0f4ff;
+  --gray-400:#94a3b8;
+  --gray-500:#64748b;
+  --gray-600:#475569;
+  --border-subtle:rgba(124,58,237,0.15);
+  --gradient-1:linear-gradient(135deg,#00d4ff,#7c3aed);
+  --gradient-2:linear-gradient(135deg,#7c3aed,#00d4ff);
+  --gradient-text:linear-gradient(135deg,#00d4ff 0%,#7c3aed 50%,#00d4ff 100%);
+  --font-body:'Inter',-apple-system,system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --max-w:1200px;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:20px;
+  --radius-xl:28px;
+  --shadow-card:0 8px 32px rgba(0,0,0,0.3),0 2px 8px rgba(124,58,237,0.08);
+  --shadow-glow:0 0 40px rgba(0,212,255,0.15),0 0 80px rgba(124,58,237,0.08);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--bg-deep);
+  color:var(--white);
+  line-height:1.6;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+code{font-family:var(--font-mono)}
+
+/* ===== UTILITY ===== */
+.container{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 24px}
+.section{padding:100px 0}
+.section-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  background:rgba(0,212,255,0.08);color:var(--cyan);
+  padding:6px 16px;border-radius:100px;border:1px solid rgba(0,212,255,0.12);
+  margin-bottom:16px;
+}
+.section-title{
+  font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.15;
+  margin-bottom:16px;
+}
+.section-title .gradient{background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:gradientShift 4s ease infinite}
+.section-sub{
+  font-size:clamp(16px,2vw,20px);color:var(--gray-400);
+  max-width:640px;margin:0 auto 56px;line-height:1.7;
+}
+.text-center{text-align:center}
+
+@keyframes gradientShift{0%,100%{background-position:0% center}50%{background-position:100% center}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(0,212,255,0.2)}50%{box-shadow:0 0 40px rgba(0,212,255,0.5),0 0 60px rgba(124,58,237,0.2)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(100%)}to{opacity:1;transform:translateX(0)}}
+@keyframes pulse-dot{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:0.5}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== ANIMATED BG MESH ===== */
+.hero-bg{
+  position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
+  overflow:hidden;pointer-events:none;
+}
+.hero-bg .orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.3;
+  animation:float 8s ease-in-out infinite;
+}
+.hero-bg .orb:nth-child(1){
+  width:500px;height:500px;background:var(--purple);
+  top:-10%;left:-5%;animation-delay:0s;
+}
+.hero-bg .orb:nth-child(2){
+  width:400px;height:400px;background:var(--cyan);
+  bottom:-5%;right:-5%;animation-delay:-3s;opacity:0.2;
+}
+.hero-bg .orb:nth-child(3){
+  width:300px;height:300px;background:linear-gradient(135deg,var(--cyan),var(--purple));
+  top:40%;left:50%;transform:translate(-50%,-50%);animation-delay:-6s;opacity:0.15;
+}
+.hero-bg .grid-overlay{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+
+/* ===== NAV ===== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:16px 0;
+  transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+nav.scrolled{
+  background:var(--bg-nav);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  border-bottom:1px solid rgba(124,58,237,0.10);
+  padding:10px 0;
+}
+nav .nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  max-width:var(--max-w);margin:0 auto;padding:0 24px;
+}
+nav .logo{
+  display:flex;align-items:center;gap:10px;
+  font-size:22px;font-weight:800;letter-spacing:-0.5px;
+}
+nav .logo svg{flex-shrink:0}
+nav .logo span{background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+nav .nav-links{display:flex;align-items:center;gap:32px}
+nav .nav-links a{
+  font-size:14px;font-weight:500;color:var(--gray-400);
+  transition:color 0.3s;position:relative;
+}
+nav .nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--gradient-1);border-radius:2px;
+  transition:width 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+nav .nav-links a:hover{color:var(--white)}
+nav .nav-links a:hover::after{width:100%}
+nav .nav-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:600;
+  background:var(--gradient-1);color:var(--white);
+  padding:10px 24px;border-radius:100px;
+  transition:all 0.3s;box-shadow:0 4px 20px rgba(0,212,255,0.25);
+}
+nav .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.35)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--white);border-radius:2px;transition:all 0.3s}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile menu */
+.mobile-menu{
+  position:fixed;top:0;right:-100%;width:300px;height:100vh;
+  background:var(--bg-mid);border-left:1px solid var(--border-subtle);
+  padding:100px 32px 32px;z-index:999;
+  transition:right 0.5s cubic-bezier(0.16,1,0.3,1);
+  display:flex;flex-direction:column;gap:8px;
+}
+.mobile-menu.open{right:0}
+.mobile-menu a{
+  font-size:18px;font-weight:500;color:var(--gray-400);
+  padding:12px 0;border-bottom:1px solid rgba(124,58,237,0.06);
+  transition:color 0.3s;
+}
+.mobile-menu a:hover{color:var(--cyan)}
+.mobile-overlay{
+  position:fixed;inset:0;z-index:998;
+  background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);
+  opacity:0;pointer-events:none;transition:opacity 0.4s;
+}
+.mobile-overlay.show{opacity:1;pointer-events:all}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;z-index:1;min-height:100vh;
+  display:flex;align-items:center;padding:120px 0 80px;
+}
+.hero .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero .hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(124,58,237,0.12);border:1px solid rgba(124,58,237,0.2);
+  padding:6px 16px 6px 6px;border-radius:100px;font-size:13px;font-weight:500;
+  color:var(--purple-glow);margin-bottom:24px;
+}
+.hero .hero-badge .badge-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--purple);
+  animation:pulse-dot 2s infinite;
+}
+.hero .hero-badge span{color:var(--gray-400)}
+.hero h1{
+  font-size:clamp(36px,6vw,64px);font-weight:900;line-height:1.08;
+  letter-spacing:-1.5px;margin-bottom:20px;
+}
+.hero h1 .gradient{background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:gradientShift 4s ease infinite}
+.hero .hero-sub{
+  font-size:clamp(16px,2vw,20px);color:var(--gray-400);
+  line-height:1.7;margin-bottom:36px;max-width:520px;
+}
+.hero .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+.hero .btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:16px;font-weight:600;font-family:var(--font-body);
+  background:var(--gradient-1);color:var(--white);
+  padding:16px 36px;border-radius:100px;border:none;cursor:pointer;
+  transition:all 0.3s;box-shadow:0 4px 24px rgba(0,212,255,0.25);
+  animation:pulse-glow 3s ease-in-out infinite;
+}
+.hero .btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 40px rgba(0,212,255,0.4)}
+.hero .btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:16px;font-weight:600;font-family:var(--font-body);
+  background:transparent;color:var(--white);
+  padding:16px 32px;border-radius:100px;border:1px solid rgba(255,255,255,0.15);
+  cursor:pointer;transition:all 0.3s;
+}
+.hero .btn-secondary:hover{background:rgba(255,255,255,0.05);border-color:var(--cyan)}
+.hero .email-form{
+  display:flex;gap:8px;max-width:460px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border-subtle);
+  padding:6px;border-radius:100px;
+}
+.hero .email-form input{
+  flex:1;background:transparent;border:none;padding:10px 18px;
+  font-size:15px;font-family:var(--font-body);color:var(--white);outline:none;
+}
+.hero .email-form input::placeholder{color:var(--gray-500)}
+.hero .email-form button{
+  background:var(--gradient-1);color:var(--white);
+  border:none;padding:10px 24px;border-radius:100px;
+  font-size:14px;font-weight:600;font-family:var(--font-body);cursor:pointer;
+  white-space:nowrap;transition:all 0.3s;
+}
+.hero .email-form button:hover{opacity:0.9}
+.hero .trust-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.hero .trust-row .trust-label{font-size:12px;color:var(--gray-500);text-transform:uppercase;letter-spacing:1px}
+.hero .trust-row .logos{display:flex;align-items:center;gap:20px;opacity:0.35}
+.hero .trust-row .logos svg{height:24px;width:auto}
+
+/* Hero right illustration */
+.hero-visual{
+  position:relative;display:flex;justify-content:center;align-items:center;
+}
+.hero-visual .code-window{
+  width:100%;max-width:520px;
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-md);overflow:hidden;
+  box-shadow:var(--shadow-card),var(--shadow-glow);
+}
+.code-window .window-header{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.04);
+  background:rgba(0,0,0,0.15);
+}
+.code-window .window-header .dot{width:10px;height:10px;border-radius:50%}
+.code-window .window-header .dot:nth-child(1){background:#ff5f56}
+.code-window .window-header .dot:nth-child(2){background:#ffbd2e}
+.code-window .window-header .dot:nth-child(3){background:#27c93f}
+.code-window .window-header span{
+  margin-left:auto;font-size:12px;color:var(--gray-500);
+  font-family:var(--font-mono);
+}
+.code-window .code-body{padding:20px;font-family:var(--font-mono);font-size:13px;line-height:1.8;overflow-x:auto}
+.code-window .code-body .line{display:flex}
+.code-window .code-body .ln{color:var(--gray-600);width:24px;flex-shrink:0;user-select:none}
+.code-window .code-body .kw{color:var(--purple-glow)}
+.code-window .code-body .fn{color:var(--cyan)}
+.code-window .code-body .str{color:#34d399}
+.code-window .code-body .cm{color:var(--gray-500);font-style:italic}
+.code-window .code-body .num{color:#fbbf24}
+
+/* ===== FEATURES ===== */
+.features{position:relative;z-index:1}
+.features .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-md);padding:36px 28px;
+  transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+  position:relative;overflow:hidden;
+}
+.feature-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gradient-1);opacity:0;transition:opacity 0.4s;
+}
+.feature-card:hover{transform:translateY(-8px);border-color:rgba(0,212,255,0.2);box-shadow:var(--shadow-card)}
+.feature-card:hover::before{opacity:1}
+.feature-card .icon{
+  width:52px;height:52px;border-radius:var(--radius-sm);
+  background:rgba(0,212,255,0.08);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;font-size:24px;
+}
+.feature-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.feature-card p{font-size:14px;color:var(--gray-400);line-height:1.7}
+
+/* ===== HOW IT WORKS ===== */
+.how-it-works{position:relative;z-index:1}
+.how-it-works .steps{display:flex;gap:0;position:relative;max-width:900px;margin:0 auto}
+.how-it-works .steps::before{
+  content:'';position:absolute;top:32px;left:16.66%;right:16.66%;
+  height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));
+  z-index:0;
+}
+.step{
+  flex:1;text-align:center;position:relative;z-index:1;padding:0 16px;
+}
+.step .step-num{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--bg-card);border:2px solid var(--border-subtle);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;font-size:20px;font-weight:800;
+  color:var(--cyan);transition:all 0.4s;
+}
+.step.active .step-num{background:var(--gradient-1);border-color:transparent;color:var(--white);box-shadow:0 0 30px rgba(0,212,255,0.3)}
+.step h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.step p{font-size:14px;color:var(--gray-400);line-height:1.7;max-width:260px;margin:0 auto}
+
+/* ===== PRICING ===== */
+.pricing{position:relative;z-index:1}
+.pricing .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+.pricing-card{
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-lg);padding:40px 32px;
+  position:relative;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+  display:flex;flex-direction:column;
+}
+.pricing-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.15);box-shadow:var(--shadow-card)}
+.pricing-card.featured{
+  border-color:rgba(0,212,255,0.25);transform:scale(1.04);
+  box-shadow:0 0 40px rgba(0,212,255,0.08),var(--shadow-card);
+}
+.pricing-card.featured:hover{transform:scale(1.04) translateY(-4px)}
+.pricing-card .badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--gradient-1);color:var(--white);
+  font-size:12px;font-weight:700;letter-spacing:0.5px;
+  padding:6px 20px;border-radius:100px;
+  text-transform:uppercase;
+}
+.pricing-card .tier{font-size:14px;font-weight:600;color:var(--cyan);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.pricing-card .price{font-size:48px;font-weight:900;letter-spacing:-1.5px;margin-bottom:4px}
+.pricing-card .price .currency{font-size:24px;font-weight:600;vertical-align:super}
+.pricing-card .price .period{font-size:16px;font-weight:400;color:var(--gray-500);vertical-align:super}
+.pricing-card .desc{color:var(--gray-400);font-size:14px;margin-bottom:32px}
+.pricing-card ul{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;flex:1}
+.pricing-card ul li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--gray-400)}
+.pricing-card ul li svg{flex-shrink:0;color:var(--cyan)}
+.pricing-card .btn-pricing{
+  display:block;text-align:center;padding:14px;border-radius:100px;
+  font-size:15px;font-weight:600;font-family:var(--font-body);
+  border:1px solid rgba(255,255,255,0.12);color:var(--white);
+  transition:all 0.3s;cursor:pointer;background:transparent;
+}
+.pricing-card .btn-pricing:hover{background:rgba(255,255,255,0.05);border-color:var(--cyan)}
+.pricing-card.featured .btn-pricing{
+  background:var(--gradient-1);border:none;
+  box-shadow:0 4px 20px rgba(0,212,255,0.25);
+}
+.pricing-card.featured .btn-pricing:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,255,0.35)}
+
+/* ===== STATS ===== */
+.stats{position:relative;z-index:1;background:var(--bg-mid)}
+.stats .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.stat-item{text-align:center}
+.stat-item .stat-num{
+  font-size:clamp(40px,5vw,64px);font-weight:900;
+  background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:8px;
+}
+.stat-item .stat-label{font-size:16px;color:var(--gray-400);font-weight:500}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{position:relative;z-index:1}
+.testimonials .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testimonial-card{
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-md);padding:32px;
+  transition:all 0.4s;
+}
+.testimonial-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.12)}
+.testimonial-card .stars{display:flex;gap:4px;margin-bottom:16px}
+.testimonial-card .stars svg{width:16px;height:16px;color:#fbbf24}
+.testimonial-card blockquote{
+  font-size:15px;color:var(--gray-400);line-height:1.8;
+  margin-bottom:24px;font-style:italic;
+}
+.testimonial-card .author{display:flex;align-items:center;gap:14px}
+.testimonial-card .author .avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--gradient-1);display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:16px;color:var(--white);flex-shrink:0;
+}
+.testimonial-card .author .info .name{font-size:14px;font-weight:600}
+.testimonial-card .author .info .role{font-size:12px;color:var(--gray-500)}
+
+/* ===== CTA ===== */
+.cta-section{
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,var(--bg-deep),rgba(124,58,237,0.12),var(--bg-deep));
+  padding:120px 0;text-align:center;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle at 30% 50%,rgba(0,212,255,0.04) 0%,transparent 50%),
+             radial-gradient(circle at 70% 50%,rgba(124,58,237,0.06) 0%,transparent 50%);
+  animation:float 12s ease-in-out infinite;
+  pointer-events:none;
+}
+.cta-section .cta-title{
+  font-size:clamp(32px,5vw,56px);font-weight:900;line-height:1.1;
+  margin-bottom:20px;position:relative;
+}
+.cta-section .cta-sub{
+  font-size:clamp(16px,2vw,20px);color:var(--gray-400);
+  max-width:560px;margin:0 auto 36px;position:relative;
+}
+.cta-section .btn-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:18px;font-weight:700;font-family:var(--font-body);
+  background:var(--gradient-1);color:var(--white);
+  padding:18px 44px;border-radius:100px;border:none;cursor:pointer;
+  transition:all 0.3s;box-shadow:0 4px 30px rgba(0,212,255,0.25);
+  position:relative;animation:pulse-glow 3s ease-in-out infinite;
+}
+.cta-section .btn-cta:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 50px rgba(0,212,255,0.4)}
+
+/* ===== DEMO VIDEO PLACEHOLDER ===== */
+.demo-section{position:relative;z-index:1;background:var(--bg-mid)}
+.demo-video-placeholder{
+  max-width:800px;margin:0 auto;border-radius:var(--radius-lg);
+  overflow:hidden;position:relative;
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+  box-shadow:var(--shadow-card);
+}
+.demo-video-placeholder .demo-img{
+  width:100%;aspect-ratio:16/9;
+  background:linear-gradient(135deg,var(--bg-card),rgba(124,58,237,0.08),var(--bg-card));
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;
+}
+.demo-video-placeholder .play-btn{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(0,212,255,0.15);border:2px solid rgba(0,212,255,0.3);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.3s;
+}
+.demo-video-placeholder .play-btn:hover{background:rgba(0,212,255,0.25);transform:scale(1.1)}
+.demo-video-placeholder .demo-label{font-size:14px;color:var(--gray-500);font-family:var(--font-mono)}
+
+/* ===== FAQ ===== */
+.faq{position:relative;z-index:1}
+.faq .faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq .faq-item{
+  background:var(--bg-card);border:1px solid var(--border-subtle);
+  border-radius:var(--radius-sm);overflow:hidden;
+  transition:border-color 0.3s;
+}
+.faq .faq-item.open{border-color:rgba(0,212,255,0.2)}
+.faq .faq-question{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px;background:none;border:none;cursor:pointer;
+  font-size:16px;font-weight:600;font-family:var(--font-body);
+  color:var(--white);text-align:left;transition:color 0.3s;
+}
+.faq .faq-question:hover{color:var(--cyan)}
+.faq .faq-question svg{flex-shrink:0;transition:transform 0.3s}
+.faq .faq-item.open .faq-question svg{transform:rotate(45deg)}
+.faq .faq-answer{
+  max-height:0;overflow:hidden;
+  transition:max-height 0.4s cubic-bezier(0.16,1,0.3,1),padding 0.4s;
+  padding:0 24px;
+}
+.faq .faq-item.open .faq-answer{
+  max-height:300px;padding:0 24px 20px;
+}
+.faq .faq-answer p{font-size:15px;color:var(--gray-400);line-height:1.8}
+
+/* ===== FOOTER ===== */
+footer{
+  background:var(--bg-mid);border-top:1px solid var(--border-subtle);
+  padding:80px 0 32px;position:relative;z-index:1;
+}
+footer .grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+footer .col-brand .logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:800;margin-bottom:16px}
+footer .col-brand .logo span{background:var(--gradient-text);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+footer .col-brand p{font-size:14px;color:var(--gray-500);line-height:1.7;max-width:300px}
+footer .col h4{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gray-400);margin-bottom:20px}
+footer .col ul{display:flex;flex-direction:column;gap:12px}
+footer .col ul a{font-size:14px;color:var(--gray-500);transition:color 0.3s}
+footer .col ul a:hover{color:var(--cyan)}
+footer .footer-bottom{
+  margin-top:56px;padding-top:24px;
+  border-top:1px solid rgba(255,255,255,0.04);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:var(--gray-600);
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.animate-on-scroll{opacity:0;transform:translateY(30px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
+.animate-on-scroll.visible{opacity:1;transform:translateY(0)}
+.animate-on-scroll.delay-1{transition-delay:0.1s}
+.animate-on-scroll.delay-2{transition-delay:0.2s}
+.animate-on-scroll.delay-3{transition-delay:0.3s}
+.animate-on-scroll.delay-4{transition-delay:0.4s}
+.animate-on-scroll.delay-5{transition-delay:0.5s}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .hero .hero-grid{grid-template-columns:1fr;gap:40px;text-align:center}
+  .hero .hero-sub{margin-left:auto;margin-right:auto}
+  .hero .hero-actions{justify-content:center}
+  .hero .email-form{margin:0 auto}
+  .hero .trust-row{justify-content:center}
+  .hero-visual{order:-1}
+  .hero-visual .code-window{max-width:440px}
+  .features .grid{grid-template-columns:repeat(2,1fr)}
+  .pricing .grid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
+  .pricing-card.featured{transform:none}
+  .pricing-card.featured:hover{transform:translateY(-4px)}
+  .testimonials .grid{grid-template-columns:1fr;max-width:480px;margin:0 auto}
+  .stats .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  .section{padding:72px 0}
+  nav .nav-links,nav .nav-cta{display:none}
+  .hamburger{display:flex}
+  .features .grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+  .how-it-works .steps{flex-direction:column;gap:40px;max-width:320px;margin:0 auto}
+  .how-it-works .steps::before{display:none}
+  .step{display:flex;align-items:center;gap:20px;text-align:left;padding:0}
+  .step .step-num{margin:0 0 0 0;flex-shrink:0}
+  .step p{max-width:none}
+  .stats .grid{grid-template-columns:1fr;gap:32px}
+  footer .grid{grid-template-columns:1fr 1fr;gap:32px}
+  footer .col-brand{grid-column:1/-1}
+}
+@media(max-width:480px){
+  .container{padding:0 16px}
+  .hero .hero-actions{flex-direction:column;align-items:stretch}
+  .hero .btn-primary,.hero .btn-secondary{justify-content:center}
+  .hero .email-form{flex-direction:column;border-radius:var(--radius-md);padding:12px}
+  .hero .email-form input{text-align:center}
+  .hero .email-form button{width:100%}
+  footer .grid{grid-template-columns:1fr}
+  .pricing .grid{max-width:none}
+}
+@media(max-width:360px){
+  .hero h1{font-size:28px}
+  .section-title{font-size:24px}
+  .pricing-card{padding:28px 20px}
+  .pricing-card .price{font-size:36px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ANIMATED BG ===== -->
+<div class="hero-bg" aria-hidden="true">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="grid-overlay"></div>
+</div>
+
+<!-- ===== NAV ===== -->
+<nav id="navbar" role="navigation">
+  <div class="nav-inner">
+    <a href="#" class="logo" aria-label="CloudForge home">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#nlg)" stroke-width="2"/><path d="M10 20c0-4 3-7 6-7s6 3 6 7" stroke="url(#nlg)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="14" r="3" fill="url(#nlg)"/><defs><linearGradient id="nlg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#00d4ff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg>
+      <span>CloudForge</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#cta" class="nav-cta">Get Early Access →</a>
+    <button class="hamburger" aria-label="Toggle menu" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features">Features</a>
+  <a href="#how-it-works">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#faq">FAQ</a>
+  <a href="#cta" style="margin-top:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gradient-1);color:var(--white);padding:12px 24px;border-radius:100px;border:none;font-weight:600;">Get Early Access →</a>
+</div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Now in Public Beta
+          <span>— 10K+ engineers onboard</span>
+        </div>
+        <h1>
+          Ship faster.<br>
+          <span class="gradient">Forge without limits.</span>
+        </h1>
+        <p class="hero-sub">
+          CloudForge is the all-in-one DevOps platform that unifies CI/CD,
+          infrastructure-as-code, observability, and team collaboration —
+          so you can build, deploy, and monitor at scale.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l10 6-10 6V4z" fill="currentColor"/></svg>
+            Watch Demo
+          </button>
+          <button class="btn-secondary" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">
+            See Pricing
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <form class="email-form" onsubmit="event.preventDefault();alert('Thanks! We\'ll keep you posted.');this.querySelector('input').value='';">
+          <input type="email" placeholder="Enter your work email" required aria-label="Email address">
+          <button type="submit">Get Early Access</button>
+        </form>
+        <div class="trust-row">
+          <span class="trust-label">Trusted by teams at</span>
+          <div class="logos">
+            <!-- Placeholder logos -->
+            <svg viewBox="0 0 80 24" fill="currentColor"><text x="0" y="18" font-family="Inter,sans-serif" font-size="16" font-weight="700">Acme</text></svg>
+            <svg viewBox="0 0 80 24" fill="currentColor"><text x="0" y="18" font-family="Inter,sans-serif" font-size="16" font-weight="700">Nexus</text></svg>
+            <svg viewBox="0 0 80 24" fill="currentColor"><text x="0" y="18" font-family="Inter,sans-serif" font-size="16" font-weight="700">Pulse</text></svg>
+            <svg viewBox="0 0 80 24" fill="currentColor"><text x="0" y="18" font-family="Inter,sans-serif" font-size="16" font-weight="700">Orbit</text></svg>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual animate-on-scroll">
+        <div class="code-window">
+          <div class="window-header">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span>deploy.yml</span>
+          </div>
+          <div class="code-body">
+            <div class="line"><span class="ln">1</span><span class="kw">name</span>: <span class="str">deploy-forge</span></div>
+            <div class="line"><span class="ln">2</span><span class="kw">on</span>:</div>
+            <div class="line"><span class="ln">3</span>&nbsp;&nbsp;<span class="kw">push</span>:</div>
+            <div class="line"><span class="ln">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">branches</span>: [main]</div>
+            <div class="line"><span class="ln">5</span><span class="kw">jobs</span>:</div>
+            <div class="line"><span class="ln">6</span>&nbsp;&nbsp;<span class="fn">deploy</span>:</div>
+            <div class="line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">runs-on</span>: forge-cluster</div>
+            <div class="line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">steps</span>:</div>
+            <div class="line"><span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="kw">run</span>: <span class="fn">forge build</span></div>
+            <div class="line"><span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="kw">run</span>: <span class="fn">forge deploy</span> <span class="num">--env</span> prod</div>
+            <div class="line"><span class="ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="kw">run</span>: <span class="fn">forge monitor</span> <span class="num">--watch</span></div>
+            <div class="line"><span class="cm" style="padding-left:8px"># Deployed in 2.4s ✓</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features section" id="features">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="section-label">Platform Features</div>
+      <h2 class="section-title">Everything your <span class="gradient">DevOps team needs</span></h2>
+      <p class="section-sub">From code commit to production monitoring — one unified platform, one seamless workflow.</p>
+    </div>
+    <div class="grid">
+      <div class="feature-card animate-on-scroll delay-1">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="3" y1="3" x2="9" y2="9"/></svg>
+        </div>
+        <h3>CI/CD Pipelines</h3>
+        <p>Parallel build runners, smart caching, and zero-downtime deployments. Push to any branch and watch your service update in seconds.</p>
+      </div>
+      <div class="feature-card animate-on-scroll delay-2">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Infrastructure as Code</h3>
+        <p>Declare your cloud infrastructure with Forge DSL or Terraform HCL. Provision AWS, GCP, and Azure from one config file.</p>
+      </div>
+      <div class="feature-card animate-on-scroll delay-3">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Real-Time Observability</h3>
+        <p>Distributed tracing, metrics, and structured logs in one pane. Set dynamic alert thresholds with machine-learning anomaly detection.</p>
+      </div>
+      <div class="feature-card animate-on-scroll delay-4">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        </div>
+        <h3>Feature Flags</h3>
+        <p>Ship trunk-based with confidence. Roll out to 1% or 100% instantly. Target by region, plan, user cohort, or custom attribute.</p>
+      </div>
+      <div class="feature-card animate-on-scroll delay-5">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Team Collaboration</h3>
+        <p>Shared runbooks, async code reviews, deployment approvals, and incident response channels — built for engineering velocity.</p>
+      </div>
+      <div class="feature-card animate-on-scroll delay-5">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Preview Environments</h3>
+        <p>Ephemeral environments on every PR. Auto-provisioned with real data seeding — catch regressions before they reach production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-it-works section" id="how-it-works">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">From commit to <span class="gradient">production in minutes</span></h2>
+      <p class="section-sub">Three simple steps. No complex setup, no config drift. Just ship.</p>
+    </div>
+    <div class="steps">
+      <div class="step animate-on-scroll delay-1">
+        <div class="step-num">1</div>
+        <h3>Connect Your Repo</h3>
+        <p>Link your GitHub, GitLab, or Bitbucket. CloudForge auto-detects your stack and generates a starter pipeline.</p>
+      </div>
+      <div class="step animate-on-scroll delay-2">
+        <div class="step-num">2</div>
+        <h3>Configure &amp; Build</h3>
+        <p>Fine-tune your build matrix, environment variables, and secrets. Our parallel runners cut build times by up to 80%.</p>
+      </div>
+      <div class="step animate-on-scroll delay-3">
+        <div class="step-num">3</div>
+        <h3>Deploy &amp; Monitor</h3>
+        <p>One-click deploy to any cloud. Real-time dashboards, instant rollbacks, and smart alerts keep you in control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats section" id="stats">
+  <div class="container">
+    <div class="grid">
+      <div class="stat-item animate-on-scroll">
+        <div class="stat-num"><span class="counter" data-target="10">0</span>K+</div>
+        <div class="stat-label">Engineers Onboarded</div>
+      </div>
+      <div class="stat-item animate-on-scroll delay-1">
+        <div class="stat-num"><span class="counter" data-target="99">0</span>.9%</div>
+        <div class="stat-label">Platform Uptime SLA</div>
+      </div>
+      <div class="stat-item animate-on-scroll delay-2">
+        <div class="stat-num"><span class="counter" data-target="150">0</span>+</div>
+        <div class="stat-label">Native Integrations</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing section" id="pricing">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Plans for every <span class="gradient">engineering team</span></h2>
+      <p class="section-sub">Start small, scale infinitely. No hidden fees, no surprise overages.</p>
+    </div>
+    <div class="grid">
+      <!-- Starter -->
+      <div class="pricing-card animate-on-scroll delay-1">
+        <div class="tier">Starter</div>
+        <div class="price"><span class="currency">$</span>29<span class="period">/mo</span></div>
+        <p class="desc">For indie devs and small teams getting started.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 5 parallel builds</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 2 GB artifact storage</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 30-day log retention</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Community support</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 team member</li>
+        </ul>
+        <button class="btn-pricing">Start Free Trial</button>
+      </div>
+      <!-- Professional (featured) -->
+      <div class="pricing-card featured animate-on-scroll delay-2">
+        <div class="badge">Most Popular</div>
+        <div class="tier">Professional</div>
+        <div class="price"><span class="currency">$</span>79<span class="period">/mo</span></div>
+        <p class="desc">For growing teams that ship multiple times daily.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 25 parallel builds</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 50 GB artifact storage</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 1-year log retention</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Priority support (2h SLA)</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Up to 15 team members</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Preview environments</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Advanced RBAC</li>
+        </ul>
+        <button class="btn-pricing">Start Free Trial</button>
+      </div>
+      <!-- Enterprise -->
+      <div class="pricing-card animate-on-scroll delay-3">
+        <div class="tier">Enterprise</div>
+        <div class="price" style="font-size:42px">Custom</div>
+        <p class="desc">For organizations with advanced compliance and scale needs.</p>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited parallel builds</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited artifact storage</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Custom log retention</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Dedicated support + TAM</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited team members</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> SSO / SAML / SCIM</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> On-premise option</li>
+          <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> SOC 2 / HIPAA / GDPR</li>
+        </ul>
+        <button class="btn-pricing">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials section" id="testimonials">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="section-label">Testimonials</div>
+      <h2 class="section-title">Loved by <span class="gradient">engineering leaders</span></h2>
+      <p class="section-sub">Hear from the teams that have transformed their delivery pipeline with CloudForge.</p>
+    </div>
+    <div class="grid">
+      <div class="testimonial-card animate-on-scroll delay-1">
+        <div class="stars">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+        </div>
+        <blockquote>"Migrated our entire 200-service fleet to CloudForge in 2 weeks. Deployment time dropped from 18 minutes to under 2. This is the future of DevOps."</blockquote>
+        <div class="author">
+          <div class="avatar">SR</div>
+          <div class="info">
+            <div class="name">Sarah Rivera</div>
+            <div class="role">VP of Engineering, NexusPay</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll delay-2">
+        <div class="stars">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+        </div>
+        <blockquote>"The preview environments alone saved us from three major regressions last quarter. Our developers actually enjoy deploying now. It's rare to see product thinking at this level."</blockquote>
+        <div class="author">
+          <div class="avatar">MC</div>
+          <div class="info">
+            <div class="name">Marcus Chen</div>
+            <div class="role">CTO, PulseStream</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card animate-on-scroll delay-3">
+        <div class="stars">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.39 4.84L18 6.82l-3.82 3.7.9 5.26L10 13.31l-5.08 2.47.9-5.26L2 6.82l5.61-.98z"/></svg>
+        </div>
+        <blockquote>"We evaluated every major DevOps platform. CloudForge's IaC integration and real-time observability are miles ahead. Our MTTR dropped by 70% in the first month."</blockquote>
+        <div class="author">
+          <div class="avatar">AK</div>
+          <div class="info">
+            <div class="name">Anika Kapoor</div>
+            <div class="role">Director of Platform, Orbit Health</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEMO SECTION ===== -->
+<section class="demo-section section" id="demo">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="section-label">See It In Action</div>
+      <h2 class="section-title">Watch <span class="gradient">CloudForge in 90 seconds</span></h2>
+      <p class="section-sub">See how teams deploy, monitor, and scale with the most advanced DevOps platform on the planet.</p>
+    </div>
+    <div class="demo-video-placeholder animate-on-scroll">
+      <div class="demo-img">
+        <div class="play-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7L8 5z" fill="var(--cyan)"/></svg>
+        </div>
+        <span class="demo-label">[ Product Demo Video — Click to Play ]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section" id="cta">
+  <div class="container">
+    <h2 class="cta-title animate-on-scroll">Ready to <span class="gradient">forge your future?</span></h2>
+    <p class="cta-sub animate-on-scroll delay-1">Join 10,000+ engineers already shipping faster with CloudForge. Start your free trial — no credit card required.</p>
+    <button class="btn-cta animate-on-scroll delay-2" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'});setTimeout(()=>document.querySelector('.email-form input')?.focus(),600)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      Start Free Trial
+    </button>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq section" id="faq">
+  <div class="container">
+    <div class="text-center animate-on-scroll">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Frequently <span class="gradient">asked questions</span></h2>
+      <p class="section-sub">Everything you need to know about CloudForge. Still have questions? We're here to help.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item animate-on-scroll">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What is CloudForge?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>CloudForge is an all-in-one DevOps platform that combines CI/CD, infrastructure-as-code, observability, feature flags, and team collaboration into a single, unified experience. It's designed to replace the 6–12 disparate tools most engineering teams juggle today.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll delay-1">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How does the free trial work?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>You get full access to the Professional plan for 14 days — no credit card required, no usage caps. After the trial, you can downgrade to Starter, continue on Professional, or talk to sales about Enterprise. Your data never gets locked in.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll delay-2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Which cloud providers do you support?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>CloudForge supports AWS, Google Cloud, Azure, and any Kubernetes cluster (including self-hosted, EKS, GKE, AKS). Our IaC engine can also target bare-metal servers and edge networks through custom providers.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll delay-3">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I self-host CloudForge?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>Yes. Our Enterprise plan includes a fully self-hosted option that runs on your own infrastructure. We provide a Helm chart, Terraform module, and dedicated migration support. SOC 2 Type II, HIPAA, and GDPR compliance are included.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll delay-4">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How does pricing work for larger teams?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>All plans are per-month with no per-seat fees. Starter and Professional include a fixed number of team members. Enterprise is custom-priced based on your scale, with unlimited users, dedicated support, and custom SLA terms. Contact our sales team for a tailored quote.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll delay-5">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What integrations do you support?
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer"><p>CloudForge integrates with 150+ tools including GitHub, GitLab, Bitbucket, Slack, PagerDuty, Jira, Datadog, Grafana, Docker, Terraform, Pulumi, and every major cloud provider. Our open API and webhook system lets you build custom integrations in minutes.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="grid">
+      <div class="col-brand">
+        <a href="#" class="logo" aria-label="CloudForge home">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect x="2" y="2" width="28" height="28" rx="8" stroke="url(#flg)" stroke-width="2"/><path d="M10 20c0-4 3-7 6-7s6 3 6 7" stroke="url(#flg)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="14" r="3" fill="url(#flg)"/><defs><linearGradient id="flg" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#00d4ff"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs></svg>
+          <span>CloudForge</span>
+        </a>
+        <p>The all-in-one DevOps platform for modern engineering teams. Build, deploy, and monitor at scale — without the complexity.</p>
+      </div>
+      <div class="col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">API Docs</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Brand</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">DPA</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 CloudForge, Inc. All rights reserved.</span>
+      <span>Made by engineers, for engineers.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== NAV SCROLL =====
+const nav = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (y > 40) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+  lastScroll = y;
+}, { passive: true });
+
+// ===== MOBILE MENU =====
+const hamburger = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const overlay = document.getElementById('mobileOverlay');
+
+function toggleMobile(open) {
+  mobileMenu.classList.toggle('open', open);
+  overlay.classList.toggle('show', open);
+  hamburger.classList.toggle('active', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+hamburger.addEventListener('click', () => toggleMobile(!mobileMenu.classList.contains('open')));
+overlay.addEventListener('click', () => toggleMobile(false));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMobile(false)));
+
+// ===== FAQ ACCORDION =====
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ===== SCROLL ANIMATIONS (Intersection Observer) =====
+const animEls = document.querySelectorAll('.animate-on-scroll');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+animEls.forEach(el => observer.observe(el));
+
+// ===== COUNTER ANIMATION =====
+const counters = document.querySelectorAll('.counter');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const duration = 2000;
+      const start = performance.now();
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+        el.textContent = current;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(c => counterObserver.observe(c));
+
+// ===== EMAIL FORM FOCUS FROM CTA =====
+// Handled inline in the CTA button onclick
+</script>
+</body>
+</html>
