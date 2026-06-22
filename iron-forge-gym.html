@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iron Forge Gym — Forge Your Legend</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',-apple-system,sans-serif;background:#0c0c0c;color:#e0e0e0;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 1.25rem}
+.section{padding:5.5rem 0}
+.section-label{display:inline-block;text-transform:uppercase;letter-spacing:3px;font-size:0.75rem;font-weight:600;color:#ff4500;margin-bottom:0.75rem;position:relative}
+.section-label::after{content:'';display:block;width:2rem;height:2px;background:#ff4500;margin-top:0.5rem}
+.section-title{font-size:2.5rem;font-weight:800;line-height:1.15;margin-bottom:1.25rem;text-transform:uppercase}
+.section-title span{color:#ff4500}
+.section-subtitle{color:#999;font-size:1.05rem;max-width:580px;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 2rem;font-weight:600;font-size:0.9rem;text-transform:uppercase;letter-spacing:1.5px;border:none;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden;font-family:'Inter',sans-serif}
+.btn-primary{background:#ff4500;color:#fff}
+.btn-primary:hover{background:#e03d00;transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,69,0,0.35)}
+.btn-outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.25)}
+.btn-outline:hover{border-color:#ff4500;color:#ff4500;transform:translateY(-2px)}
+.btn-dark{background:#1a1a1a;color:#fff;border:1px solid #333}
+.btn-dark:hover{background:#ff4500;border-color:#ff4500;transform:translateY(-2px)}
+
+/* ===== HEADER ===== */
+.header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 0;transition:all 0.3s ease;background:transparent}
+.header.scrolled{background:rgba(12,12,12,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:0.6rem 0;box-shadow:0 2px 30px rgba(0,0,0,0.5)}
+.header .container{display:flex;align-items:center;justify-content:space-between}
+.logo{font-size:1.35rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;display:flex;align-items:center;gap:0.5rem}
+.logo-icon{width:32px;height:32px;background:#ff4500;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.nav{display:flex;gap:2rem;align-items:center}
+.nav a{font-size:0.8rem;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:#aaa;transition:color 0.3s;position:relative}
+.nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#ff4500;transition:width 0.3s}
+.nav a:hover{color:#fff}
+.nav a:hover::after{width:100%}
+.nav .nav-cta{background:#ff4500;color:#fff;padding:0.5rem 1.25rem;border-radius:0;font-weight:600}
+.nav .nav-cta::after{display:none}
+.nav .nav-cta:hover{background:#e03d00;transform:none}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:26px;height:2.5px;background:#fff;transition:all 0.3s;border-radius:2px}
+.hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.active span:nth-child(2){opacity:0}
+.hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:#0c0c0c}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,69,0,0.08) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 20% 30%,rgba(255,69,0,0.04) 0%,transparent 70%);z-index:1}
+.hero-overlay{position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(180deg,rgba(12,12,12,0.9) 0%,transparent 100%);z-index:1}
+.hero-grid{position:absolute;inset:0;z-index:1;opacity:0.03;background-image:linear-gradient(rgba(255,255,255,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.1) 1px,transparent 1px);background-size:60px 60px}
+.hero-particles{position:absolute;inset:0;z-index:1;overflow:hidden}
+.particle{position:absolute;width:3px;height:3px;background:#ff4500;border-radius:50%;opacity:0;animation:particleFloat 8s infinite}
+.particle:nth-child(1){left:10%;animation-delay:0s;width:2px;height:2px}
+.particle:nth-child(2){left:25%;animation-delay:1.2s;width:4px;height:4px;background:rgba(255,69,0,0.5)}
+.particle:nth-child(3){left:45%;animation-delay:2.5s;width:2px;height:2px}
+.particle:nth-child(4){left:60%;animation-delay:0.8s;width:3px;height:3px}
+.particle:nth-child(5){left:75%;animation-delay:3.2s;width:2px;height:2px;background:rgba(255,69,0,0.4)}
+.particle:nth-child(6){left:85%;animation-delay:1.8s;width:4px;height:4px}
+.particle:nth-child(7){left:35%;animation-delay:4s;width:2px;height:2px}
+.particle:nth-child(8){left:55%;animation-delay:2s;width:3px;height:3px;background:rgba(255,69,0,0.3)}
+@keyframes particleFloat{0%,100%{opacity:0;transform:translateY(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-60vh)}}
+.hero .container{position:relative;z-index:2;padding-top:5rem;padding-bottom:3rem}
+.hero-content{max-width:700px}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(255,69,0,0.12);border:1px solid rgba(255,69,0,0.25);font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:#ff4500;margin-bottom:1.5rem}
+.hero-badge span{width:5px;height:5px;background:#ff4500;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-size:clamp(2.5rem,7vw,5rem);font-weight:900;line-height:1.05;text-transform:uppercase;margin-bottom:0.5rem}
+.hero h1 .line-block{display:block}
+.hero h1 .accent{color:#ff4500;-webkit-text-stroke:0;position:relative}
+.hero h1 .accent::after{content:'FORGE';position:absolute;left:2px;top:2px;color:transparent;-webkit-text-stroke:1px rgba(255,69,0,0.2);z-index:-1}
+.hero-desc{font-size:1.1rem;color:#999;max-width:520px;margin:1.5rem 0 2.25rem;line-height:1.8}
+.hero-cta{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-stats{display:flex;gap:3rem;margin-top:3.5rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06)}
+.hero-stat h3{font-size:2rem;font-weight:800;color:#ff4500;line-height:1}
+.hero-stat p{font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;color:#777;margin-top:0.35rem}
+
+/* ===== ABOUT ===== */
+.about{background:#111}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-image{position:relative;height:420px;overflow:hidden;background:linear-gradient(135deg,#1a1a1a,#222);border:1px solid #2a2a2a}
+.about-image-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#333}
+.about-image-inner .big-quote{font-size:6rem;font-weight:900;color:rgba(255,69,0,0.08);line-height:1;margin-bottom:0.5rem}
+.about-image-inner .quote-text{font-size:1.1rem;color:#555;font-weight:500;max-width:240px;text-align:center;font-style:italic}
+.about-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#ff4500,transparent)}
+.about-text .section-title{font-size:2rem}
+.about-text p{color:#999;margin-bottom:1rem;font-size:0.95rem;line-height:1.8}
+.about-values{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.about-value{display:flex;align-items:flex-start;gap:0.75rem}
+.about-value-icon{width:24px;height:24px;background:#ff4500;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);flex-shrink:0;margin-top:2px}
+.about-value-text h4{font-size:0.85rem;font-weight:600;color:#fff;margin-bottom:0.15rem}
+.about-value-text p{font-size:0.8rem;color:#777;margin:0}
+
+/* ===== CLASSES ===== */
+.classes{background:#0c0c0c}
+.classes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.25rem;margin-top:3rem}
+.class-card{background:#151515;border:1px solid #222;padding:2rem 1.5rem;position:relative;transition:all 0.4s ease;overflow:hidden;cursor:default}
+.class-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:#ff4500;transition:height 0.4s ease}
+.class-card:hover{transform:translateY(-4px);border-color:#333;background:#1a1a1a}
+.class-card:hover::before{height:100%}
+.class-card-icon{font-size:2.25rem;margin-bottom:1.25rem;display:inline-block}
+.class-card h3{font-size:1.1rem;font-weight:700;margin-bottom:0.5rem;text-transform:uppercase;letter-spacing:0.5px}
+.class-card p{font-size:0.85rem;color:#888;line-height:1.7;margin-bottom:1.25rem}
+.class-card-tag{display:inline-block;font-size:0.65rem;text-transform:uppercase;letter-spacing:1px;color:#ff4500;font-weight:600;padding:0.2rem 0.75rem;border:1px solid rgba(255,69,0,0.25);background:rgba(255,69,0,0.06)}
+.class-card .class-schedule{font-size:0.7rem;color:#666;margin-top:0.75rem;letter-spacing:0.5px}
+
+/* ===== TRAINERS ===== */
+.trainers{background:#111}
+.trainers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem;margin-top:3rem;text-align:center}
+.trainer-card{transition:all 0.4s ease;padding:1.5rem}
+.trainer-card:hover{transform:translateY(-4px)}
+.trainer-avatar{width:130px;height:130px;border-radius:50%;margin:0 auto 1.25rem;position:relative;overflow:hidden;border:2px solid #2a2a2a;transition:border-color 0.3s;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:800;color:#333}
+.trainer-avatar .avatar-initials{position:absolute;color:rgba(255,69,0,0.08);font-size:4rem;font-weight:900;z-index:0;line-height:1}
+.trainer-avatar .avatar-icon{position:relative;z-index:1;font-size:2.5rem}
+.trainer-card:hover .trainer-avatar{border-color:#ff4500}
+.trainer-card h4{font-size:1rem;font-weight:700;margin-bottom:0.2rem}
+.trainer-card .trainer-role{font-size:0.75rem;color:#ff4500;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-bottom:0.75rem}
+.trainer-card p{font-size:0.82rem;color:#888;line-height:1.7;max-width:280px;margin:0 auto}
+.trainer-social{display:flex;justify-content:center;gap:0.75rem;margin-top:1rem}
+.trainer-social a{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:1px solid #333;font-size:0.75rem;color:#666;transition:all 0.3s;font-weight:600}
+.trainer-social a:hover{border-color:#ff4500;color:#ff4500;background:rgba(255,69,0,0.1)}
+
+/* ===== PRICING ===== */
+.pricing{background:#0c0c0c}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;align-items:start}
+.pricing-card{background:#151515;border:1px solid #222;padding:2.5rem 2rem;position:relative;transition:all 0.4s ease}
+.pricing-card.featured{background:#1a1a1a;border-color:rgba(255,69,0,0.3);transform:scale(1.03)}
+.pricing-card.featured .pricing-badge{position:absolute;top:-1px;right:2rem;background:#ff4500;color:#fff;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;padding:0.3rem 1rem}
+.pricing-card:hover{transform:translateY(-4px);border-color:#333}
+.pricing-card.featured:hover{transform:scale(1.03) translateY(-4px)}
+.pricing-card h3{font-size:1.1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:0.25rem}
+.pricing-card .pricing-desc{font-size:0.8rem;color:#888;margin-bottom:1.25rem}
+.pricing-card .price{font-size:3rem;font-weight:900;color:#fff;line-height:1}
+.pricing-card .price span{font-size:1rem;font-weight:400;color:#666;margin-left:0.25rem}
+.pricing-card .price-sub{font-size:0.75rem;color:#666;margin-bottom:1.75rem}
+.pricing-card .pricing-features{list-style:none;margin-bottom:2rem}
+.pricing-card .pricing-features li{display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0;font-size:0.85rem;color:#bbb;border-bottom:1px solid rgba(255,255,255,0.04)}
+.pricing-card .pricing-features li:last-child{border-bottom:none}
+.pricing-card .pricing-features li .check{color:#ff4500;font-weight:700;font-size:1rem}
+.pricing-card .pricing-features li .cross{color:#555;font-weight:700;font-size:1rem}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials{background:#111;overflow:hidden}
+.testimonials-slider{display:flex;gap:1.5rem;margin-top:3rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding-bottom:1rem}
+.testimonials-slider::-webkit-scrollbar{display:none}
+.testimonial-card{flex:0 0 360px;scroll-snap-align:start;background:#151515;border:1px solid #222;padding:2rem;position:relative;transition:all 0.3s}
+.testimonial-card:hover{border-color:#333;transform:translateY(-2px)}
+.testimonial-stars{color:#ff4500;font-size:0.9rem;letter-spacing:2px;margin-bottom:1rem}
+.testimonial-card blockquote{font-size:0.9rem;color:#bbb;line-height:1.8;font-style:italic;margin-bottom:1.25rem}
+.testimonial-author{display:flex;align-items:center;gap:0.75rem}
+.testimonial-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#222,#2a2a2a);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:#ff4500;flex-shrink:0}
+.testimonial-author-info h4{font-size:0.85rem;font-weight:600}
+.testimonial-author-info p{font-size:0.7rem;color:#666;text-transform:uppercase;letter-spacing:0.5px}
+.testimonial-card::before{content:'"';position:absolute;top:1rem;right:1.5rem;font-size:4rem;line-height:1;color:rgba(255,69,0,0.06);font-weight:900;font-family:serif}
+.testimonial-controls{display:flex;gap:0.75rem;justify-content:center;margin-top:2rem}
+.testimonial-dot{width:10px;height:10px;border:1.5px solid #444;background:transparent;cursor:pointer;transition:all 0.3s;border-radius:0;padding:0}
+.testimonial-dot.active,.testimonial-dot:hover{background:#ff4500;border-color:#ff4500}
+
+/* ===== CONTACT ===== */
+.contact{background:#0c0c0c}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
+.contact-info h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.5px}
+.contact-info p{color:#888;font-size:0.9rem;line-height:1.8;margin-bottom:0.5rem}
+.contact-info .contact-item{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem}
+.contact-info .contact-icon{width:36px;height:36px;background:#151515;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.85rem;color:#ff4500;font-weight:700}
+.contact-info .contact-detail h4{font-size:0.8rem;font-weight:600;color:#fff;margin-bottom:0.15rem}
+.contact-info .contact-detail p{font-size:0.82rem;color:#888;margin:0}
+.contact-map{height:340px;border:1px solid #222;overflow:hidden;position:relative;background:#111}
+.contact-map iframe{width:100%;height:100%;border:none;filter:grayscale(1) invert(0.9) hue-rotate(180deg) saturate(0.5);transition:filter 0.3s}
+.contact-map:hover iframe{filter:none}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.contact-form input,.contact-form textarea{padding:0.9rem 1rem;background:#151515;border:1px solid #2a2a2a;color:#e0e0e0;font-family:'Inter',sans-serif;font-size:0.9rem;transition:border-color 0.3s;outline:none;width:100%}
+.contact-form input:focus,.contact-form textarea:focus{border-color:#ff4500}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#555}
+.contact-form textarea{min-height:120px;resize:vertical}
+.contact-form .btn{width:fit-content}
+
+/* ===== FOOTER ===== */
+.footer{background:#080808;border-top:1px solid #1a1a1a;padding:3rem 0 1.5rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:2.5rem}
+.footer-brand .logo{margin-bottom:0.75rem}
+.footer-brand p{font-size:0.82rem;color:#666;max-width:300px;line-height:1.7}
+.footer-col h4{font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#fff;margin-bottom:1.25rem}
+.footer-col a{display:block;font-size:0.82rem;color:#666;padding:0.35rem 0;transition:color 0.3s}
+.footer-col a:hover{color:#ff4500}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid #1a1a1a;font-size:0.78rem;color:#555}
+.footer-social{display:flex;gap:0.75rem}
+.footer-social a{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border:1px solid #222;font-size:0.75rem;color:#666;font-weight:600;transition:all 0.3s}
+.footer-social a:hover{border-color:#ff4500;color:#ff4500;background:rgba(255,69,0,0.08)}
+
+/* ===== SCROLL INDICATOR ===== */
+.scroll-indicator{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:0.5rem;color:#555;font-size:0.65rem;text-transform:uppercase;letter-spacing:1.5px;animation:bounce 2s infinite}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-6px)}60%{transform:translateX(-50%) translateY(-3px)}}
+.scroll-line{width:1px;height:30px;background:linear-gradient(180deg,#ff4500,transparent);animation:scrollLine 2s infinite}
+@keyframes scrollLine{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+/* ===== BACK TO TOP ===== */
+.back-to-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;background:#ff4500;color:#fff;border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.3s;z-index:999}
+.back-to-top.show{opacity:1;visibility:visible}
+.back-to-top:hover{background:#e03d00;transform:translateY(-2px)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:992px){
+.section{padding:4rem 0}
+.about-grid{grid-template-columns:1fr;gap:2.5rem}
+.about-image{height:320px}
+.contact-grid{grid-template-columns:1fr}
+.footer-grid{grid-template-columns:1fr 1fr}
+.pricing-card.featured{transform:none}
+.pricing-card.featured:hover{transform:translateY(-4px)}
+}
+@media(max-width:768px){
+.section-title{font-size:1.8rem}
+.nav{position:fixed;top:0;right:-100%;width:75%;max-width:320px;height:100vh;background:#111;flex-direction:column;padding:5rem 2rem 2rem;gap:1.5rem;transition:right 0.4s ease;z-index:999;border-left:1px solid #222}
+.nav.open{right:0}
+.hamburger{display:flex;z-index:1001}
+.nav .nav-cta{margin-top:0.5rem}
+.hero h1{font-size:2.8rem}
+.hero-stats{gap:1.5rem;flex-wrap:wrap}
+.hero-stat h3{font-size:1.5rem}
+.classes-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.trainers-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.pricing-grid{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+.pricing-card.featured{transform:none}
+.pricing-card.featured:hover{transform:translateY(-4px)}
+.testimonial-card{flex:0 0 290px}
+.section{padding:3rem 0}
+.footer-grid{grid-template-columns:1fr;gap:1.5rem}
+.footer-bottom{flex-direction:column;gap:1rem;text-align:center}
+.about-values{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+.hero h1{font-size:2rem}
+.hero-desc{font-size:0.95rem}
+.hero-cta{flex-direction:column}
+.hero-cta .btn{width:100%;justify-content:center}
+.hero-stats{gap:1rem}
+.hero-stat h3{font-size:1.25rem}
+.section-title{font-size:1.5rem}
+.classes-grid{grid-template-columns:1fr}
+.pricing-card{padding:2rem 1.5rem}
+.testimonial-card{flex:0 0 260px}
+.contact-map{height:240px}
+.container{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+<div class="container">
+<a href="#hero" class="logo"><span class="logo-icon"></span>Iron Forge</a>
+<button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+<nav class="nav" id="nav">
+<a href="#about">About</a>
+<a href="#classes">Programs</a>
+<a href="#trainers">Trainers</a>
+<a href="#pricing">Pricing</a>
+<a href="#testimonials">Results</a>
+<a href="#contact" class="nav-cta">Join Now</a>
+</nav>
+</div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+<div class="hero-bg"></div>
+<div class="hero-overlay"></div>
+<div class="hero-grid"></div>
+<div class="hero-particles">
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div>
+</div>
+<div class="container">
+<div class="hero-content">
+<div class="hero-badge"><span></span> Now Open — Join Today</div>
+<h1>
+<span class="line-block">Iron</span>
+<span class="line-block accent">Forge</span>
+<span class="line-block">Gym</span>
+</h1>
+<p class="hero-desc">Step into the forge. Transform your body, sharpen your mind, and build the strength that lasts a lifetime. Premium training starts here.</p>
+<div class="hero-cta">
+<a href="#pricing" class="btn btn-primary">Start Your Free Trial</a>
+<a href="#about" class="btn btn-outline">Explore More</a>
+</div>
+<div class="hero-stats">
+<div class="hero-stat"><h3>15+</h3><p>Years Experience</p></div>
+<div class="hero-stat"><h3>2K+</h3><p>Active Members</p></div>
+<div class="hero-stat"><h3>50+</h3><p>Expert Programs</p></div>
+</div>
+</div>
+</div>
+<div class="scroll-indicator">
+<span>Scroll</span>
+<div class="scroll-line"></div>
+</div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about section" id="about">
+<div class="container">
+<div class="about-grid">
+<div class="about-image">
+<div class="about-image-inner">
+<div class="big-quote">&ldquo;</div>
+<p class="quote-text">Strength does not come from the body. It comes from the will.</p>
+</div>
+</div>
+<div class="about-text">
+<span class="section-label">Our Philosophy</span>
+<h2 class="section-title">Forged in <span>Fire</span>, Built to Last</h2>
+<p>Iron Forge Gym isn't just another fitness center — it's a sanctuary for those who refuse to settle. We believe true strength is built through discipline, consistency, and the right environment.</p>
+<p>Every piece of equipment, every program, every trainer is selected with one mission: to help you forge the strongest version of yourself. No gimmicks. No shortcuts. Just iron and will.</p>
+<div class="about-values">
+<div class="about-value">
+<div class="about-value-icon"></div>
+<div class="about-value-text">
+<h4>Premium Equipment</h4>
+<p>Top-tier machines and free weights</p>
+</div>
+</div>
+<div class="about-value">
+<div class="about-value-icon"></div>
+<div class="about-value-text">
+<h4>Expert Coaching</h4>
+<p>Certified trainers, real results</p>
+</div>
+</div>
+<div class="about-value">
+<div class="about-value-icon"></div>
+<div class="about-value-text">
+<h4>24/7 Access</h4>
+<p>Train on your schedule</p>
+</div>
+</div>
+<div class="about-value">
+<div class="about-value-icon"></div>
+<div class="about-value-text">
+<h4>Community</h4>
+<p>Brothers and sisters in iron</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== CLASSES / PROGRAMS ===== -->
+<section class="classes section" id="classes">
+<div class="container">
+<div class="section-label">Our Programs</div>
+<h2 class="section-title">Choose Your <span>Forge</span></h2>
+<p class="section-subtitle">From raw strength to explosive conditioning, find the program that matches your goals.</p>
+<div class="classes-grid">
+<div class="class-card">
+<div class="class-card-icon">🏋️</div>
+<h3>Strength Training</h3>
+<p>Build raw power with compound lifts, progressive overload, and periodized programming designed for serious gains.</p>
+<span class="class-card-tag">Foundation</span>
+<p class="class-schedule">Mon · Wed · Fri — 6:00 AM / 12:00 PM / 6:00 PM</p>
+</div>
+<div class="class-card">
+<div class="class-card-icon">⚡</div>
+<h3>HIIT</h3>
+<p>High-intensity interval training that torches calories, builds cardiovascular endurance, and keeps your metabolism firing.</p>
+<span class="class-card-tag">Cardio</span>
+<p class="class-schedule">Tue · Thu · Sat — 7:00 AM / 5:30 PM</p>
+</div>
+<div class="class-card">
+<div class="class-card-icon">🧘</div>
+<h3>Yoga</h3>
+<p>Improve flexibility, mobility, and mental focus. Restore your body between heavy training days with guided flows.</p>
+<span class="class-card-tag">Recovery</span>
+<p class="class-schedule">Mon · Wed · Fri — 8:00 AM / 7:00 PM</p>
+</div>
+<div class="class-card">
+<div class="class-card-icon">🥊</div>
+<h3>Boxing</h3>
+<p>Master footwork, striking combinations, and defensive drills. Full-body conditioning disguised as combat sport training.</p>
+<span class="class-card-tag">Combat</span>
+<p class="class-schedule">Tue · Thu · Sat — 6:30 AM / 6:00 PM</p>
+</div>
+<div class="class-card">
+<div class="class-card-icon">🎯</div>
+<h3>Personal Training</h3>
+<p>One-on-one coaching with customized programming, form correction, and accountability. Your goals, our expertise.</p>
+<span class="class-card-tag">Premium</span>
+<p class="class-schedule">By appointment — book your session</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== TRAINERS ===== -->
+<section class="trainers section" id="trainers">
+<div class="container">
+<div class="section-label">Meet The Team</div>
+<h2 class="section-title">Elite <span>Coaches</span></h2>
+<p class="section-subtitle">Our trainers have decades of combined experience. They don't just coach — they forge champions.</p>
+<div class="trainers-grid">
+<div class="trainer-card">
+<div class="trainer-avatar"><span class="avatar-initials">AM</span><span class="avatar-icon">💪</span></div>
+<h4>Alex Mercer</h4>
+<p class="trainer-role">Head Strength Coach</p>
+<p>10+ years coaching elite athletes. Specializes in powerlifting, olympic lifting, and sports performance.</p>
+<div class="trainer-social">
+<a href="#" aria-label="Instagram">IG</a>
+<a href="#" aria-label="Twitter">X</a>
+</div>
+</div>
+<div class="trainer-card">
+<div class="trainer-avatar"><span class="avatar-initials">SR</span><span class="avatar-icon">🧘</span></div>
+<h4>Scarlett Reyes</h4>
+<p class="trainer-role">Yoga &amp; Mobility Lead</p>
+<p>Certified yoga instructor and mobility specialist. Helps athletes recover, move better, and prevent injury.</p>
+<div class="trainer-social">
+<a href="#" aria-label="Instagram">IG</a>
+<a href="#" aria-label="Twitter">X</a>
+</div>
+</div>
+<div class="trainer-card">
+<div class="trainer-avatar"><span class="avatar-initials">JC</span><span class="avatar-icon">🥊</span></div>
+<h4>Jake Cruz</h4>
+<p class="trainer-role">Boxing &amp; HIIT Coach</p>
+<p>Former amateur boxer with 8 years of coaching experience. High energy, precise technique, relentless motivation.</p>
+<div class="trainer-social">
+<a href="#" aria-label="Instagram">IG</a>
+<a href="#" aria-label="Twitter">X</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="pricing section" id="pricing">
+<div class="container">
+<div class="section-label">Pricing</div>
+<h2 class="section-title">Plans That <span>Fit</span></h2>
+<p class="section-subtitle">No hidden fees. No long-term contracts. Choose the membership that matches your commitment.</p>
+<div class="pricing-grid">
+<div class="pricing-card">
+<h3>Basic</h3>
+<p class="pricing-desc">Essential access for independent training.</p>
+<div class="price">$29<span>/mo</span></div>
+<p class="price-sub">Billed monthly · Cancel anytime</p>
+<ul class="pricing-features">
+<li><span class="check">+</span> Gym access 6 AM – 10 PM</li>
+<li><span class="check">+</span> Free weights &amp; machines</li>
+<li><span class="check">+</span> Locker room access</li>
+<li><span class="cross">–</span> Classes &amp; programs</li>
+<li><span class="cross">–</span> Personal training</li>
+</ul>
+<a href="#" class="btn btn-dark">Choose Plan</a>
+</div>
+
+<div class="pricing-card featured">
+<div class="pricing-badge">Most Popular</div>
+<h3>Pro</h3>
+<p class="pricing-desc">Full access with classes and coaching.</p>
+<div class="price">$59<span>/mo</span></div>
+<p class="price-sub">Billed monthly · Cancel anytime</p>
+<ul class="pricing-features">
+<li><span class="check">+</span> 24/7 gym access</li>
+<li><span class="check">+</span> All free weights &amp; machines</li>
+<li><span class="check">+</span> Unlimited group classes</li>
+<li><span class="check">+</span> 1 PT session / month</li>
+<li><span class="cross">–</span> Nutrition coaching</li>
+</ul>
+<a href="#" class="btn btn-primary">Choose Plan</a>
+</div>
+
+<div class="pricing-card">
+<h3>Elite</h3>
+<p class="pricing-desc">The complete membership experience.</p>
+<div class="price">$99<span>/mo</span></div>
+<p class="price-sub">Billed monthly · Cancel anytime</p>
+<ul class="pricing-features">
+<li><span class="check">+</span> 24/7 gym access</li>
+<li><span class="check">+</span> All equipment &amp; facilities</li>
+<li><span class="check">+</span> Unlimited group classes</li>
+<li><span class="check">+</span> 4 PT sessions / month</li>
+<li><span class="check">+</span> Nutrition coaching</li>
+</ul>
+<a href="#" class="btn btn-dark">Choose Plan</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials section" id="testimonials">
+<div class="container">
+<div class="section-label">Testimonials</div>
+<h2 class="section-title">Real <span>Results</span></h2>
+<p class="section-subtitle">Hear from the men and women who forged their best selves at Iron Forge.</p>
+<div class="testimonials-slider" id="testimonialSlider">
+<div class="testimonial-card">
+<div class="testimonial-stars">★★★★★</div>
+<blockquote>"Iron Forge completely transformed my approach to training. The coaches are incredible and the atmosphere pushes you to be better every single day."</blockquote>
+<div class="testimonial-author">
+<div class="testimonial-avatar">DM</div>
+<div class="testimonial-author-info">
+<h4>Derek Mitchell</h4>
+<p>Pro Member · 14 months</p>
+</div>
+</div>
+</div>
+<div class="testimonial-card">
+<div class="testimonial-stars">★★★★★</div>
+<blockquote>"I've been to gyms all over the city. Nothing compares to Iron Forge. The equipment is top-tier and the community is genuinely supportive."</blockquote>
+<div class="testimonial-author">
+<div class="testimonial-avatar">CL</div>
+<div class="testimonial-author-info">
+<h4>Chloe Lin</h4>
+<p>Elite Member · 8 months</p>
+</div>
+</div>
+</div>
+<div class="testimonial-card">
+<div class="testimonial-stars">★★★★★</div>
+<blockquote>"The boxing program completely changed my fitness game. I've lost 25 lbs and gained more confidence than I ever thought possible."</blockquote>
+<div class="testimonial-author">
+<div class="testimonial-avatar">MR</div>
+<div class="testimonial-author-info">
+<h4>Marcus Reed</h4>
+<p>Pro Member · 6 months</p>
+</div>
+</div>
+</div>
+<div class="testimonial-card">
+<div class="testimonial-stars">★★★★★</div>
+<blockquote>"Alex and the team have built something special here. The personal training completely changed my deadlift form and my back has never been healthier."</blockquote>
+<div class="testimonial-author">
+<div class="testimonial-avatar">SJ</div>
+<div class="testimonial-author-info">
+<h4>Sarah Jenkins</h4>
+<p>Elite Member · 11 months</p>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-controls">
+<button class="testimonial-dot active" data-index="0" aria-label="Slide 1"></button>
+<button class="testimonial-dot" data-index="1" aria-label="Slide 2"></button>
+<button class="testimonial-dot" data-index="2" aria-label="Slide 3"></button>
+<button class="testimonial-dot" data-index="3" aria-label="Slide 4"></button>
+</div>
+</div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact section" id="contact">
+<div class="container">
+<div class="section-label">Contact</div>
+<h2 class="section-title">Find Your <span>Forge</span></h2>
+<p class="section-subtitle">Ready to start? Come visit us or drop a message. Your transformation begins with a single step.</p>
+<div class="contact-grid">
+<div class="contact-info">
+<h3>Get In Touch</h3>
+<div class="contact-item">
+<div class="contact-icon">📍</div>
+<div class="contact-detail">
+<h4>Location</h4>
+<p>473 Iron Works Blvd, Suite 100<br>Austin, TX 78701</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">📞</div>
+<div class="contact-detail">
+<h4>Phone</h4>
+<p>(512) 555-FORGE</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">✉️</div>
+<div class="contact-detail">
+<h4>Email</h4>
+<p>forge@ironforgeqym.com</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">🕐</div>
+<div class="contact-detail">
+<h4>Hours</h4>
+<p>Mon–Fri: 5 AM – 11 PM<br>Sat–Sun: 6 AM – 9 PM</p>
+</div>
+</div>
+<form class="contact-form">
+<input type="text" placeholder="Your Name" required>
+<input type="email" placeholder="Your Email" required>
+<textarea placeholder="Tell us about your goals..." required></textarea>
+<button type="submit" class="btn btn-primary">Send Message</button>
+</form>
+</div>
+<div class="contact-map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3445.278496815469!2d-97.7430618!3d30.2729063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b5b222111111%3A0x1234567890abcdef!2sAustin%2C%20TX!5e0!3m2!1sen!2sus!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Iron Forge Gym Location"></iframe>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="#hero" class="logo"><span class="logo-icon"></span>Iron Forge</a>
+<p>Forging stronger bodies, sharper minds, and unbreakable spirits since 2010. Premium training for those who demand more.</p>
+</div>
+<div class="footer-col">
+<h4>Programs</h4>
+<a href="#classes">Strength Training</a>
+<a href="#classes">HIIT</a>
+<a href="#classes">Yoga</a>
+<a href="#classes">Boxing</a>
+<a href="#classes">Personal Training</a>
+</div>
+<div class="footer-col">
+<h4>Support</h4>
+<a href="#contact">Contact Us</a>
+<a href="#">FAQ</a>
+<a href="#">Membership Guide</a>
+<a href="#">Waiver &amp; Policies</a>
+<a href="#">Careers</a>
+</div>
+<div class="footer-col">
+<h4>Follow</h4>
+<a href="#">Instagram</a>
+<a href="#">YouTube</a>
+<a href="#">Twitter / X</a>
+<a href="#">TikTok</a>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Iron Forge Gym, LLC. All rights reserved.</p>
+<div class="footer-social">
+<a href="#" aria-label="Instagram">IG</a>
+<a href="#" aria-label="YouTube">YT</a>
+<a href="#" aria-label="Twitter">X</a>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+(function(){
+'use strict';
+
+// Sticky header
+const header = document.getElementById('header');
+let lastScroll = 0;
+window.addEventListener('scroll', function(){
+const y = window.scrollY;
+header.classList.toggle('scrolled', y > 60);
+lastScroll = y;
+},{passive:true});
+
+// Mobile hamburger
+const hamburger = document.getElementById('hamburger');
+const nav = document.getElementById('nav');
+const navLinks = nav.querySelectorAll('a');
+
+function toggleMenu(){
+hamburger.classList.toggle('active');
+nav.classList.toggle('open');
+document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+hamburger.addEventListener('click', toggleMenu);
+navLinks.forEach(function(link){
+link.addEventListener('click', function(){
+if(nav.classList.contains('open')) toggleMenu();
+});
+});
+
+// Close menu on outside click
+document.addEventListener('click', function(e){
+if(!hamburger.contains(e.target) && !nav.contains(e.target) && nav.classList.contains('open')){
+toggleMenu();
+}
+});
+
+// Back to top button
+const backBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', function(){
+backBtn.classList.toggle('show', window.scrollY > 500);
+},{passive:true});
+backBtn.addEventListener('click', function(){
+window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// Testimonial dots
+const slider = document.getElementById('testimonialSlider');
+const dots = document.querySelectorAll('.testimonial-dot');
+dots.forEach(function(dot){
+dot.addEventListener('click', function(){
+const idx = parseInt(this.getAttribute('data-index'));
+const card = slider.children[idx];
+if(card){
+card.scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});
+}
+dots.forEach(function(d){d.classList.remove('active')});
+this.classList.add('active');
+});
+});
+
+// Update active dot on scroll
+slider.addEventListener('scroll', function(){
+var closest = 0;
+var minDist = Infinity;
+for(var i=0; i<dots.length; i++){
+var card = slider.children[i];
+if(!card) continue;
+var rect = card.getBoundingClientRect();
+var dist = Math.abs(rect.left);
+if(dist < minDist){
+minDist = dist;
+closest = i;
+}
+}
+dots.forEach(function(d){d.classList.remove('active')});
+if(dots[closest]) dots[closest].classList.add('active');
+},{passive:true});
+
+// Contact form submit (prevent default + show message)
+const contactForm = document.querySelector('.contact-form');
+if(contactForm){
+contactForm.addEventListener('submit', function(e){
+e.preventDefault();
+var btn = this.querySelector('.btn');
+var orig = btn.textContent;
+btn.textContent = '✓ Sent!';
+btn.style.pointerEvents = 'none';
+setTimeout(function(){
+btn.textContent = orig;
+btn.style.pointerEvents = '';
+},2500);
+});
+}
+
+})();
+</script>
+</body>
+</html>

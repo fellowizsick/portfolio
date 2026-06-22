@@ -309,6 +309,33 @@ nav.scrolled {
   background-clip: text;
 }
 
+.preview-restaurant {
+  background: linear-gradient(135deg, #2d1b1b 0%, #4a1a1a 50%, #6b2d2d 100%);
+}
+.preview-restaurant::before {
+  content: 'Bella Napoli'; font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700; color: #f5e6d0;
+}
+
+.preview-gym {
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #2d1b0e 100%);
+}
+.preview-gym::before {
+  content: 'Iron Forge'; font-family: 'Inter', sans-serif;
+  font-size: 2.5rem; font-weight: 800; letter-spacing: 3px;
+  background: linear-gradient(135deg, #ff6b35, #ff4500);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.preview-vet {
+  background: linear-gradient(135deg, #1a2e1a 0%, #2d4a2d 50%, #3d6b3d 100%);
+}
+.preview-vet::before {
+  content: 'Paws & Claws'; font-family: 'Playfair Display', serif;
+  font-size: 2.2rem; font-weight: 700; color: #e8f5e9;
+}
+
 .card-preview {
   display: flex; align-items: center; justify-content: center;
 }
@@ -586,8 +613,8 @@ footer .socials a:hover {
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </a>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num">5</div><div class="label">Live Projects</div></div>
-    <div class="hero-stat"><div class="num">4</div><div class="label">Industries</div></div>
+    <div class="hero-stat"><div class="num">8</div><div class="label">Live Projects</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="label">Industries</div></div>
     <div class="hero-stat"><div class="num">100%</div><div class="label">Custom Code</div></div>
     <div class="hero-stat"><div class="num">~1hr</div><div class="label">Per Page</div></div>
   </div>
@@ -686,6 +713,57 @@ footer .socials a:hover {
         <h3>NovaLearn</h3>
         <p>Online diploma program page with program cards (6 fields), tuition comparison (85% savings), 4-step enrollment process, FAQ accordion, and multiple CTAs throughout.</p>
         <a href="novalearn.html" target="_blank" class="card-link">
+          View Live →
+        </a>
+      </div>
+    </div>
+
+    <!-- BELLA NAPOLI -->
+    <div class="portfolio-card reveal" style="transition-delay: 0.6s">
+      <div class="card-preview preview-restaurant"></div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="card-badge realty" style="background:#6b2d2d">Restaurant</span>
+          <span>🍝 Italian</span>
+          <span>📅 Booking</span>
+        </div>
+        <h3>Bella Napoli Ristorante</h3>
+        <p>Authentic Italian restaurant landing page with warm dark-red ambiance, menu preview with dish cards, ambiance gallery, reservation form, and Google Maps location.</p>
+        <a href="bella-napoli.html" target="_blank" class="card-link">
+          View Live →
+        </a>
+      </div>
+    </div>
+
+    <!-- IRON FORGE GYM -->
+    <div class="portfolio-card reveal" style="transition-delay: 0.7s">
+      <div class="card-preview preview-gym"></div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="card-badge saas" style="background:#ff4500">Fitness</span>
+          <span>💪 Gym</span>
+          <span>📊 Programs</span>
+        </div>
+        <h3>Iron Forge Gym</h3>
+        <p>Industrial-style gym landing page with class/program cards, trainer profiles, 3-tier pricing, HIIT/Yoga/Boxing schedules, and free trial signup form.</p>
+        <a href="iron-forge-gym.html" target="_blank" class="card-link">
+          View Live →
+        </a>
+      </div>
+    </div>
+
+    <!-- PAWS & CLAWS VET -->
+    <div class="portfolio-card reveal" style="transition-delay: 0.8s">
+      <div class="card-preview preview-vet"></div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="card-badge medical" style="background:#2d6b2d">Veterinary</span>
+          <span>🐾 Pet Care</span>
+          <span>📅 Booking</span>
+        </div>
+        <h3>Paws & Claws Veterinary Clinic</h3>
+        <p>Warm, trustworthy vet clinic page with service cards (wellness exams, dental, surgery, grooming), team profiles, testimonials, and appointment booking form.</p>
+        <a href="paws-claws-vet.html" target="_blank" class="card-link">
           View Live →
         </a>
       </div>
