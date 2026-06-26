@@ -103,7 +103,8 @@ img{max-width:100%;display:block}
 .hero{
   min-height:100vh;display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;padding:100px 24px 80px;
-  background:linear-gradient(135deg, #1A1A1A 0%, #2D1A1A 40%, #1A1A1A 100%)
+  background:linear-gradient(135deg, rgba(26,26,26,0.88) 0%, rgba(45,26,26,0.80) 40%, rgba(26,26,26,0.90) 100%),
+    url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&q=80') center center / cover no-repeat;
 }
 .hero-bg-pattern{
   position:absolute;inset:0;overflow:hidden;pointer-events:none
@@ -451,11 +452,7 @@ img{max-width:100%;display:block}
 <!-- ===== ABOUT ===== -->
 <section class="section about" id="about" aria-label="About Bella Napoli">
   <div class="section-inner about-grid">
-    <div class="about-image" role="img" aria-label="Interior of Bella Napoli Ristorante with warm lighting">
-      <div class="about-image-placeholder">
-        <span aria-hidden="true">&#127860;</span>
-        Interior &mdash; Bella Napoli
-      </div>
+    <div class="about-image" role="img" aria-label="Interior of Bella Napoli Ristorante with warm lighting" style="background:linear-gradient(135deg,rgba(61,53,48,0.3),rgba(45,42,40,0.3)), url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80') center center / cover no-repeat">
       <div class="about-image-accent" aria-hidden="true"></div>
     </div>
     <div class="about-text">
@@ -473,16 +470,16 @@ img{max-width:100%;display:block}
       </p>
       <div class="about-stats">
         <div class="about-stat">
-          <span class="about-stat-num">36&nbsp;Yrs</span>
-          <span class="about-stat-label">Of Tradition</span>
+          <span class="about-stat-num">25+</span>
+          <span class="about-stat-label">Years of Tradition</span>
         </div>
         <div class="about-stat">
-          <span class="about-stat-num">4&nbsp;Gens</span>
-          <span class="about-stat-label">Family Legacy</span>
+          <span class="about-stat-num">4.7★</span>
+          <span class="about-stat-label">Avg. Rating</span>
         </div>
         <div class="about-stat">
-          <span class="about-stat-num">15K+</span>
-          <span class="about-stat-label">Happy Guests</span>
+          <span class="about-stat-num">Zagat</span>
+          <span class="about-stat-label">Rated</span>
         </div>
       </div>
       <div class="about-signature">&mdash; Chef Matteo Bianchi</div>
@@ -574,39 +571,19 @@ img{max-width:100%;display:block}
       <p class="section-subtitle">Warm candlelight, rustic elegance, and the gentle hum of a lively Italian kitchen.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item" role="img" aria-label="Main dining room with warm candlelit tables and exposed brick walls">
-        <div class="gallery-item-content">
-          <span class="gallery-item-icon" aria-hidden="true">&#127860;</span>
-          <span class="gallery-item-label">Main Dining Room</span>
-        </div>
+      <div class="gallery-item" role="img" aria-label="Main dining room with warm candlelit tables and exposed brick walls" style="background: linear-gradient(145deg,rgba(61,53,48,0.2),rgba(45,42,40,0.2)), url('https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=600&q=80') center center / cover no-repeat">
         <div class="gallery-item-overlay"><span>View Gallery</span></div>
       </div>
-      <div class="gallery-item" role="img" aria-label="Wood-fired pizza oven glowing with embers">
-        <div class="gallery-item-content">
-          <span class="gallery-item-icon" aria-hidden="true">&#128293;</span>
-          <span class="gallery-item-label">Wood-fired Oven</span>
-        </div>
+      <div class="gallery-item" role="img" aria-label="Wood-fired pizza oven glowing with embers" style="background: linear-gradient(145deg,rgba(61,53,48,0.2),rgba(45,42,40,0.2)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80') center center / cover no-repeat">
         <div class="gallery-item-overlay"><span>View Gallery</span></div>
       </div>
-      <div class="gallery-item" role="img" aria-label="Bar area with vintage Italian wine bottles and amber lighting">
-        <div class="gallery-item-content">
-          <span class="gallery-item-icon" aria-hidden="true">&#127863;</span>
-          <span class="gallery-item-label">Wine Bar</span>
-        </div>
+      <div class="gallery-item" role="img" aria-label="Bar area with vintage Italian wine bottles and amber lighting" style="background: linear-gradient(145deg,rgba(61,53,48,0.2),rgba(45,42,40,0.2)), url('https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=600&q=80') center center / cover no-repeat">
         <div class="gallery-item-overlay"><span>View Gallery</span></div>
       </div>
-      <div class="gallery-item" role="img" aria-label="Private dining room with long wooden table and chandelier">
-        <div class="gallery-item-content">
-          <span class="gallery-item-icon" aria-hidden="true">&#128716;</span>
-          <span class="gallery-item-label">Private Dining</span>
-        </div>
+      <div class="gallery-item" role="img" aria-label="Private dining room with long wooden table and chandelier" style="background: linear-gradient(145deg,rgba(61,53,48,0.2),rgba(45,42,40,0.2)), url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80') center center / cover no-repeat">
         <div class="gallery-item-overlay"><span>View Gallery</span></div>
       </div>
-      <div class="gallery-item" role="img" aria-label="Outdoor patio with string lights and olive trees">
-        <div class="gallery-item-content">
-          <span class="gallery-item-icon" aria-hidden="true">&#127966;</span>
-          <span class="gallery-item-label">Garden Patio</span>
-        </div>
+      <div class="gallery-item" role="img" aria-label="Outdoor patio with string lights and olive trees" style="background: linear-gradient(145deg,rgba(61,53,48,0.2),rgba(45,42,40,0.2)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80') center center / cover no-repeat">
         <div class="gallery-item-overlay"><span>View Gallery</span></div>
       </div>
     </div>
@@ -722,6 +699,31 @@ img{max-width:100%;display:block}
           referrerpolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+      <form action="#" method="post" netlify style="margin-top:24px;background:var(--dark-soft);border-radius:12px;padding:32px;border:1px solid rgba(255,255,255,0.04)">
+        <input type="hidden" name="form-name" value="Bella Napoli Reservation" />
+        <h3 style="font-family:var(--font-serif);font-size:1.2rem;color:var(--cream-pure);margin-bottom:20px">Make a Reservation</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <input type="text" name="name" placeholder="Your Name" required style="padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:var(--cream-pure);font-family:var(--font-sans);font-size:0.9rem;outline:none;width:100%" />
+          <input type="email" name="email" placeholder="Email Address" required style="padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:var(--cream-pure);font-family:var(--font-sans);font-size:0.9rem;outline:none;width:100%" />
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px">
+          <input type="tel" name="phone" placeholder="Phone" style="padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:var(--cream-pure);font-family:var(--font-sans);font-size:0.9rem;outline:none;width:100%" />
+          <input type="date" name="date" required style="padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:var(--cream-pure);font-family:var(--font-sans);font-size:0.9rem;outline:none;width:100%" />
+          <select name="guests" required style="padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:var(--text-muted);font-family:var(--font-sans);font-size:0.9rem;outline:none;width:100%;appearance:none">
+            <option value="">Guests</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+            <option value="6">6+ Guests</option>
+          </select>
+        </div>
+        <div style="margin-top:16px">
+          <textarea name="notes" placeholder="Any special requests or dietary requirements?" style="width:100%;padding:14px 16px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.04);color:var(--cream-pure);font-family:var(--font-sans);font-size:0.9rem;outline:none;min-height:80px;resize:vertical"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px">Confirm Reservation</button>
+      </form>
     </div>
   </div>
 </section>

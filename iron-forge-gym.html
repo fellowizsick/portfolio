@@ -52,7 +52,10 @@ ul{list-style:none}
 
 /* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;background:#0c0c0c}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,69,0,0.08) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 20% 30%,rgba(255,69,0,0.04) 0%,transparent 70%);z-index:1}
+.hero-bg{position:absolute;inset:0;background:
+    radial-gradient(ellipse 80% 60% at 70% 50%,rgba(255,69,0,0.12) 0%,transparent 70%),
+    linear-gradient(135deg, rgba(12,12,12,0.85) 0%, rgba(12,12,12,0.70) 100%),
+    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80') center center / cover no-repeat;z-index:1}
 .hero-overlay{position:absolute;top:0;left:0;right:0;height:40%;background:linear-gradient(180deg,rgba(12,12,12,0.9) 0%,transparent 100%);z-index:1}
 .hero-grid{position:absolute;inset:0;z-index:1;opacity:0.03;background-image:linear-gradient(rgba(255,255,255,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.1) 1px,transparent 1px);background-size:60px 60px}
 .hero-particles{position:absolute;inset:0;z-index:1;overflow:hidden}
@@ -84,7 +87,7 @@ ul{list-style:none}
 /* ===== ABOUT ===== */
 .about{background:#111}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.about-image{position:relative;height:420px;overflow:hidden;background:linear-gradient(135deg,#1a1a1a,#222);border:1px solid #2a2a2a}
+.about-image{position:relative;height:420px;overflow:hidden;background:linear-gradient(135deg,rgba(26,26,26,0.3),rgba(34,34,34,0.3)), url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80') center center / cover no-repeat;border:1px solid #2a2a2a}
 .about-image-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#333}
 .about-image-inner .big-quote{font-size:6rem;font-weight:900;color:rgba(255,69,0,0.08);line-height:1;margin-bottom:0.5rem}
 .about-image-inner .quote-text{font-size:1.1rem;color:#555;font-weight:500;max-width:240px;text-align:center;font-style:italic}
@@ -293,9 +296,9 @@ ul{list-style:none}
 <a href="#about" class="btn btn-outline">Explore More</a>
 </div>
 <div class="hero-stats">
-<div class="hero-stat"><h3>15+</h3><p>Years Experience</p></div>
 <div class="hero-stat"><h3>2K+</h3><p>Active Members</p></div>
-<div class="hero-stat"><h3>50+</h3><p>Expert Programs</p></div>
+<div class="hero-stat"><h3>40+</h3><p>Classes / Week</p></div>
+<div class="hero-stat"><h3>4.9★</h3><p>Member Rating</p></div>
 </div>
 </div>
 </div>
@@ -409,7 +412,7 @@ ul{list-style:none}
 <p class="section-subtitle">Our trainers have decades of combined experience. They don't just coach — they forge champions.</p>
 <div class="trainers-grid">
 <div class="trainer-card">
-<div class="trainer-avatar"><span class="avatar-initials">AM</span><span class="avatar-icon">💪</span></div>
+<div class="trainer-avatar" style="background:linear-gradient(135deg,rgba(26,26,26,0.3),rgba(34,34,34,0.3)), url('https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=200&q=80') center center / cover no-repeat;border-color:#ff4500"><span class="avatar-initials" style="display:none">AM</span></div>
 <h4>Alex Mercer</h4>
 <p class="trainer-role">Head Strength Coach</p>
 <p>10+ years coaching elite athletes. Specializes in powerlifting, olympic lifting, and sports performance.</p>
@@ -419,7 +422,7 @@ ul{list-style:none}
 </div>
 </div>
 <div class="trainer-card">
-<div class="trainer-avatar"><span class="avatar-initials">SR</span><span class="avatar-icon">🧘</span></div>
+<div class="trainer-avatar" style="background:linear-gradient(135deg,rgba(26,26,26,0.3),rgba(34,34,34,0.3)), url('https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&q=80') center center / cover no-repeat;border-color:#ff4500"><span class="avatar-initials" style="display:none">SR</span></div>
 <h4>Scarlett Reyes</h4>
 <p class="trainer-role">Yoga &amp; Mobility Lead</p>
 <p>Certified yoga instructor and mobility specialist. Helps athletes recover, move better, and prevent injury.</p>
@@ -429,7 +432,7 @@ ul{list-style:none}
 </div>
 </div>
 <div class="trainer-card">
-<div class="trainer-avatar"><span class="avatar-initials">JC</span><span class="avatar-icon">🥊</span></div>
+<div class="trainer-avatar" style="background:linear-gradient(135deg,rgba(26,26,26,0.3),rgba(34,34,34,0.3)), url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=200&q=80') center center / cover no-repeat;border-color:#ff4500"><span class="avatar-initials" style="display:none">JC</span></div>
 <h4>Jake Cruz</h4>
 <p class="trainer-role">Boxing &amp; HIIT Coach</p>
 <p>Former amateur boxer with 8 years of coaching experience. High energy, precise technique, relentless motivation.</p>
@@ -596,7 +599,8 @@ ul{list-style:none}
 <p>Mon–Fri: 5 AM – 11 PM<br>Sat–Sun: 6 AM – 9 PM</p>
 </div>
 </div>
-<form class="contact-form">
+<form class="contact-form" netlify>
+<input type="hidden" name="form-name" value="Iron Forge Gym Contact" />
 <input type="text" placeholder="Your Name" required>
 <input type="email" placeholder="Your Email" required>
 <textarea placeholder="Tell us about your goals..." required></textarea>

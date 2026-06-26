@@ -931,7 +931,21 @@
                         <div>JR</div>
                         <div>+</div>
                     </div>
-                    <p>Trusted by <strong>200+ homeowners</strong> across the region</p>
+                    <p>Trusted by <strong>500+ homeowners</strong> across the region</p>
+                </div>
+                <div class="hero-stats" style="display:flex;gap:40px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.12);flex-wrap:wrap">
+                    <div style="text-align:center">
+                        <div style="font-size:1.6rem;font-weight:700;color:var(--orange);line-height:1">500+</div>
+                        <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Projects Completed</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div style="font-size:1.6rem;font-weight:700;color:var(--orange);line-height:1">4.8★</div>
+                        <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Avg. Rating</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div style="font-size:1.6rem;font-weight:700;color:var(--orange);line-height:1">12</div>
+                        <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Years Experience</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -980,37 +994,37 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <div class="gallery-img gallery-living">
+                    <div class="gallery-img" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80') center center / cover no-repeat;">
                         <span class="label">🔄 Before</span>
                     </div>
                     <div class="gallery-caption">Living room refresh — dated beige to warm greige</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img gallery-after">
+                    <div class="gallery-img" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80') center center / cover no-repeat;">
                         <span class="label">✨ After</span>
                     </div>
                     <div class="gallery-caption">Same space, transformed with soft neutral tones</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img gallery-kitchen">
+                    <div class="gallery-img" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80') center center / cover no-repeat;">
                         <span class="label">🔄 Before</span>
                     </div>
                     <div class="gallery-caption">Kitchen cabinets — worn oak ready for renewal</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img gallery-bathroom">
+                    <div class="gallery-img" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=600&q=80') center center / cover no-repeat;">
                         <span class="label">✨ After</span>
                     </div>
                     <div class="gallery-caption">Cabinet refinishing — sleek matte navy finish</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img gallery-exterior">
+                    <div class="gallery-img" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80') center center / cover no-repeat;">
                         <span class="label">🔄 Before</span>
                     </div>
                     <div class="gallery-caption">Exterior — faded paint, peeling trim</div>
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-img gallery-before">
+                    <div class="gallery-img" style="background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.5) 100%), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80') center center / cover no-repeat;">
                         <span class="label">✨ After</span>
                     </div>
                     <div class="gallery-caption">Complete exterior makeover — bold &amp; beautiful</div>
@@ -1117,7 +1131,8 @@
                 <p class="section-sub">Tell us about your project and we'll get back to you within 24 hours with a detailed, no-obligation estimate.</p>
             </div>
             <div class="form-wrapper">
-                <form id="quoteForm" action="#" method="post">
+                <form id="quoteForm" action="#" method="post" netlify>
+                    <input type="hidden" name="form-name" value="ProCoat Quote Request" />
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Full Name *</label>

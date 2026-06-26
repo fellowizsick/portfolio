@@ -169,7 +169,10 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      background:
+        linear-gradient(135deg, rgba(15, 12, 41, 0.92) 0%, rgba(48, 43, 99, 0.85) 50%, rgba(36, 36, 62, 0.90) 100%),
+        url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200&q=80')
+        center center / cover no-repeat;
       position: relative;
       overflow: hidden;
       padding: 120px 0 100px;
@@ -703,6 +706,20 @@
             Career Support
           </div>
         </div>
+        <div class="hero-stats-row" style="display:flex;gap:36px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08)">
+          <div style="text-align:center">
+            <div style="font-size:1.5rem;font-weight:800;color:#c9a84c;line-height:1">50K+</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Students</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:1.5rem;font-weight:800;color:#c9a84c;line-height:1">95%</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Completion Rate</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:1.5rem;font-weight:800;color:#c9a84c;line-height:1">✓</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-top:4px">Accredited</div>
+          </div>
+        </div>
       </div>
       <div class="hero-visual">
         <div class="hero-card">
@@ -956,8 +973,26 @@
     <div class="container">
       <h2>Ready to Transform Your Future?</h2>
       <p>Join thousands of successful graduates. Your accredited diploma is just one application away.</p>
-      <a href="#" class="btn-primary" style="font-size:1.05rem; padding:18px 44px;">Enroll Now &mdash; Classes Start Soon <i>→</i></a>
-      <p style="margin-top:20px; font-size:0.8rem; color:rgba(255,255,255,0.4);">No application fee &bull; Free transcript evaluation &bull; 30-day money-back guarantee</p>
+      <form action="#" method="post" netlify style="max-width:520px;margin:0 auto">
+        <input type="hidden" name="form-name" value="NovaLearn Enrollment" />
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <input type="text" name="name" placeholder="Your Full Name" required style="flex:1;min-width:180px;padding:16px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none" />
+          <input type="email" name="email" placeholder="Email Address" required style="flex:1;min-width:180px;padding:16px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:#fff;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none" />
+        </div>
+        <div style="margin-top:12px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <select name="program" required style="flex:1;min-width:200px;padding:16px 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;appearance:none">
+            <option value="">Select a Program</option>
+            <option value="business">Business Administration</option>
+            <option value="healthcare">Healthcare Management</option>
+            <option value="it">Information Technology</option>
+            <option value="design">Graphic Design</option>
+            <option value="criminal-justice">Criminal Justice</option>
+            <option value="liberal-arts">Liberal Arts</option>
+          </select>
+          <button type="submit" class="btn-primary" style="font-size:1.05rem;padding:18px 44px;border:none;cursor:pointer">Enroll Now <i>→</i></button>
+        </div>
+      </form>
+      <p style="margin-top:20px;font-size:0.8rem;color:rgba(255,255,255,0.4);">No application fee &bull; Free transcript evaluation &bull; 30-day money-back guarantee</p>
     </div>
   </section>
 
