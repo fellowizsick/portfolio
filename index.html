@@ -209,6 +209,8 @@ nav.scrolled {
   transform: translateY(-6px);
   box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px var(--accent-glow);
 }
+.featured-card[data-href] { cursor: pointer; }
+.featured-card[data-href]:active { transform: scale(0.98); }
 .featured-card .card-preview {
   width: 100%; height: 240px;
   display: flex; align-items: center; justify-content: center;
@@ -313,6 +315,8 @@ nav.scrolled {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.3);
 }
+.compact-card[data-href] { cursor: pointer; }
+.compact-card[data-href]:active { transform: scale(0.97); }
 .compact-card .card-preview {
   width: 100%; height: 140px;
   display: flex; align-items: center; justify-content: center;
@@ -720,7 +724,7 @@ footer .socials a:hover {
   <div class="featured-grid">
 
     <!-- CLOUDFORGE SAAS -->
-    <div class="featured-card reveal" style="transition-delay: 0.1s">
+    <div class="featured-card reveal" style="transition-delay: 0.1s" data-href="cloudforge.html">
       <div class="card-preview preview-saas"></div>
       <div class="featured-tag">★ Featured</div>
       <span class="card-badge badge-saas">SaaS</span>
@@ -739,7 +743,7 @@ footer .socials a:hover {
     </div>
 
     <!-- STERLING DENTAL -->
-    <div class="featured-card reveal" style="transition-delay: 0.2s">
+    <div class="featured-card reveal" style="transition-delay: 0.2s" data-href="sterling-dental.html">
       <div class="card-preview preview-medical"></div>
       <div class="featured-tag">★ Featured</div>
       <span class="card-badge badge-medical">Healthcare</span>
@@ -758,7 +762,7 @@ footer .socials a:hover {
     </div>
 
     <!-- LUXVISTA REALTY -->
-    <div class="featured-card reveal" style="transition-delay: 0.3s">
+    <div class="featured-card reveal" style="transition-delay: 0.3s" data-href="luxvista-realty.html">
       <div class="card-preview preview-luxury"></div>
       <div class="featured-tag">★ Featured</div>
       <span class="card-badge badge-reality">Real Estate</span>
@@ -783,7 +787,7 @@ footer .socials a:hover {
   <div class="compact-grid">
 
     <!-- PROCOAT PAINTERS -->
-    <div class="compact-card reveal" style="transition-delay: 0.1s">
+    <div class="compact-card reveal" style="transition-delay: 0.1s" data-href="procoat-painters.html">
       <div class="card-preview compact-preview-painting"></div>
       <span class="card-badge badge-painting">Home Services</span>
       <div class="card-body">
@@ -798,7 +802,7 @@ footer .socials a:hover {
     </div>
 
     <!-- NOVALEARN -->
-    <div class="compact-card reveal" style="transition-delay: 0.2s">
+    <div class="compact-card reveal" style="transition-delay: 0.2s" data-href="novalearn.html">
       <div class="card-preview compact-preview-education"></div>
       <span class="card-badge badge-education">Education</span>
       <div class="card-body">
@@ -813,7 +817,7 @@ footer .socials a:hover {
     </div>
 
     <!-- BELLA NAPOLI -->
-    <div class="compact-card reveal" style="transition-delay: 0.3s">
+    <div class="compact-card reveal" style="transition-delay: 0.3s" data-href="bella-napoli.html">
       <div class="card-preview compact-preview-restaurant"></div>
       <span class="card-badge badge-restaurant">Restaurant</span>
       <div class="card-body">
@@ -828,7 +832,7 @@ footer .socials a:hover {
     </div>
 
     <!-- IRON FORGE GYM -->
-    <div class="compact-card reveal" style="transition-delay: 0.4s">
+    <div class="compact-card reveal" style="transition-delay: 0.4s" data-href="iron-forge-gym.html">
       <div class="card-preview compact-preview-gym"></div>
       <span class="card-badge badge-fitness">Fitness</span>
       <div class="card-body">
@@ -843,7 +847,7 @@ footer .socials a:hover {
     </div>
 
     <!-- PAWS & CLAWS VET -->
-    <div class="compact-card reveal" style="transition-delay: 0.5s">
+    <div class="compact-card reveal" style="transition-delay: 0.5s" data-href="paws-claws-vet.html">
       <div class="card-preview compact-preview-vet"></div>
       <span class="card-badge badge-veterinary">Veterinary</span>
       <div class="card-body">
@@ -1089,6 +1093,14 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 revealElements.forEach(el => observer.observe(el));
+
+// Card click handler — open data-href on any card area (skip inner links)
+document.querySelector('#work').addEventListener('click', e => {
+  const card = e.target.closest('[data-href]');
+  if (card && !e.target.closest('a')) {
+    window.open(card.dataset.href, '_blank');
+  }
+});
 
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(q => {
