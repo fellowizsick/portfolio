@@ -86,6 +86,7 @@ code{font-family:var(--font-mono)}
 .hero-bg{
   position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;
   overflow:hidden;pointer-events:none;
+  background:linear-gradient(135deg,#0a0a1a 0%,#12122a 70%), url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1600&q=80') center/cover no-repeat;
 }
 .hero-bg .orb{
   position:absolute;border-radius:50%;filter:blur(80px);opacity:0.3;
@@ -302,7 +303,15 @@ nav .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,2
   margin-bottom:20px;font-size:24px;
 }
 .feature-card h3{font-size:18px;font-weight:700;margin-bottom:10px}
-.feature-card p{font-size:14px;color:var(--gray-400);line-height:1.7}
+.feature-card p{font-size:14px;color:var(--gray-400);line-height:1.7;margin-bottom:16px}
+.feature-card .tech-tags{display:flex;flex-wrap:wrap;gap:6px}
+.feature-card .tech-tags span{
+  font-size:11px;font-weight:600;font-family:var(--font-mono);
+  padding:3px 10px;border-radius:100px;
+  background:rgba(124,58,237,0.12);color:var(--purple-glow);
+  border:1px solid rgba(124,58,237,0.15);
+  letter-spacing:0.3px;
+}
 
 /* ===== HOW IT WORKS ===== */
 .how-it-works{position:relative;z-index:1}
@@ -633,8 +642,9 @@ footer .footer-bottom{
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
-        <form class="email-form" onsubmit="event.preventDefault();alert('Thanks! We\'ll keep you posted.');this.querySelector('input').value='';">
-          <input type="email" placeholder="Enter your work email" required aria-label="Email address">
+        <form class="email-form" data-netlify="true" name="early-access" onsubmit="this.querySelector('button[type=submit]').textContent='Sending...';">
+          <input type="hidden" name="form-name" value="early-access">
+          <input type="email" name="email" placeholder="Enter your work email" required aria-label="Email address">
           <button type="submit">Get Early Access</button>
         </form>
         <div class="trust-row">
@@ -655,18 +665,11 @@ footer .footer-bottom{
             <span>deploy.yml</span>
           </div>
           <div class="code-body">
-            <div class="line"><span class="ln">1</span><span class="kw">name</span>: <span class="str">deploy-forge</span></div>
-            <div class="line"><span class="ln">2</span><span class="kw">on</span>:</div>
-            <div class="line"><span class="ln">3</span>&nbsp;&nbsp;<span class="kw">push</span>:</div>
-            <div class="line"><span class="ln">4</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">branches</span>: [main]</div>
-            <div class="line"><span class="ln">5</span><span class="kw">jobs</span>:</div>
-            <div class="line"><span class="ln">6</span>&nbsp;&nbsp;<span class="fn">deploy</span>:</div>
-            <div class="line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">runs-on</span>: forge-cluster</div>
-            <div class="line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">steps</span>:</div>
-            <div class="line"><span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="kw">run</span>: <span class="fn">forge build</span></div>
-            <div class="line"><span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="kw">run</span>: <span class="fn">forge deploy</span> <span class="num">--env</span> prod</div>
-            <div class="line"><span class="ln">11</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- <span class="kw">run</span>: <span class="fn">forge monitor</span> <span class="num">--watch</span></div>
-            <div class="line"><span class="cm" style="padding-left:8px"># Deployed in 2.4s ✓</span></div>
+            <pre style="margin:0;line-height:1.7;color:var(--gray-400);font-size:13px;font-family:var(--font-mono)"><span style="color:var(--cyan)">$</span> <span style="color:var(--white)">forge deploy --env production</span>
+<span style="color:#34d399">✓ Build complete (12.4s)</span>
+<span style="color:#34d399">✓ Deploying to 27 nodes</span>
+<span style="color:#34d399">✓ All health checks passed</span>
+<span style="color:var(--cyan)">→</span> <span style="color:var(--purple-glow)">https://app.cloudforge.io/deploy/abc123</span></pre>
           </div>
         </div>
       </div>
@@ -689,6 +692,7 @@ footer .footer-bottom{
         </div>
         <h3>CI/CD Pipelines</h3>
         <p>Parallel build runners, smart caching, and zero-downtime deployments. Push to any branch and watch your service update in seconds.</p>
+        <div class="tech-tags"><span>Kubernetes</span><span>Docker</span></div>
       </div>
       <div class="feature-card animate-on-scroll delay-2">
         <div class="icon">
@@ -696,6 +700,7 @@ footer .footer-bottom{
         </div>
         <h3>Infrastructure as Code</h3>
         <p>Declare your cloud infrastructure with Forge DSL or Terraform HCL. Provision AWS, GCP, and Azure from one config file.</p>
+        <div class="tech-tags"><span>Terraform</span><span>AWS</span></div>
       </div>
       <div class="feature-card animate-on-scroll delay-3">
         <div class="icon">
@@ -703,6 +708,7 @@ footer .footer-bottom{
         </div>
         <h3>Real-Time Observability</h3>
         <p>Distributed tracing, metrics, and structured logs in one pane. Set dynamic alert thresholds with machine-learning anomaly detection.</p>
+        <div class="tech-tags"><span>Grafana</span><span>Prometheus</span></div>
       </div>
       <div class="feature-card animate-on-scroll delay-4">
         <div class="icon">
@@ -710,6 +716,7 @@ footer .footer-bottom{
         </div>
         <h3>Feature Flags</h3>
         <p>Ship trunk-based with confidence. Roll out to 1% or 100% instantly. Target by region, plan, user cohort, or custom attribute.</p>
+        <div class="tech-tags"><span>Kubernetes</span><span>Helm</span></div>
       </div>
       <div class="feature-card animate-on-scroll delay-5">
         <div class="icon">
@@ -717,6 +724,7 @@ footer .footer-bottom{
         </div>
         <h3>Team Collaboration</h3>
         <p>Shared runbooks, async code reviews, deployment approvals, and incident response channels — built for engineering velocity.</p>
+        <div class="tech-tags"><span>Docker</span><span>Kubernetes</span></div>
       </div>
       <div class="feature-card animate-on-scroll delay-5">
         <div class="icon">
@@ -724,6 +732,7 @@ footer .footer-bottom{
         </div>
         <h3>Preview Environments</h3>
         <p>Ephemeral environments on every PR. Auto-provisioned with real data seeding — catch regressions before they reach production.</p>
+        <div class="tech-tags"><span>Docker</span><span>AWS</span></div>
       </div>
     </div>
   </div>
@@ -763,15 +772,15 @@ footer .footer-bottom{
     <div class="grid">
       <div class="stat-item animate-on-scroll">
         <div class="stat-num"><span class="counter" data-target="10">0</span>K+</div>
-        <div class="stat-label">Engineers Onboarded</div>
+        <div class="stat-label">Deployments / month</div>
       </div>
       <div class="stat-item animate-on-scroll delay-1">
-        <div class="stat-num"><span class="counter" data-target="99">0</span>.9%</div>
-        <div class="stat-label">Platform Uptime SLA</div>
+        <div class="stat-num"><span class="counter" data-target="99">0</span>.99%</div>
+        <div class="stat-label">Platform Uptime</div>
       </div>
       <div class="stat-item animate-on-scroll delay-2">
-        <div class="stat-num"><span class="counter" data-target="150">0</span>+</div>
-        <div class="stat-label">Native Integrations</div>
+        <div class="stat-num"><span class="counter" data-target="50">0</span>K+</div>
+        <div class="stat-label">Developers Onboarded</div>
       </div>
     </div>
   </div>
@@ -786,11 +795,11 @@ footer .footer-bottom{
       <p class="section-sub">Start small, scale infinitely. No hidden fees, no surprise overages.</p>
     </div>
     <div class="grid">
-      <!-- Starter -->
+      <!-- Free -->
       <div class="pricing-card animate-on-scroll delay-1">
-        <div class="tier">Starter</div>
-        <div class="price"><span class="currency">$</span>29<span class="period">/mo</span></div>
-        <p class="desc">For indie devs and small teams getting started.</p>
+        <div class="tier">Free</div>
+        <div class="price"><span class="currency">$</span>0<span class="period">/mo</span></div>
+        <p class="desc">For indie devs, open-source projects, and kicking the tires.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 5 parallel builds</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 2 GB artifact storage</li>
@@ -798,14 +807,14 @@ footer .footer-bottom{
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Community support</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 team member</li>
         </ul>
-        <button class="btn-pricing">Start Free Trial</button>
+        <button class="btn-pricing">Get Started Free</button>
       </div>
-      <!-- Professional (featured) -->
+      <!-- Pro (featured) -->
       <div class="pricing-card featured animate-on-scroll delay-2">
         <div class="badge">Most Popular</div>
-        <div class="tier">Professional</div>
+        <div class="tier">Pro</div>
         <div class="price"><span class="currency">$</span>79<span class="period">/mo</span></div>
-        <p class="desc">For growing teams that ship multiple times daily.</p>
+        <p class="desc">For professional teams shipping multiple times daily to production.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 25 parallel builds</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> 50 GB artifact storage</li>
@@ -815,13 +824,13 @@ footer .footer-bottom{
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Preview environments</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Advanced RBAC</li>
         </ul>
-        <button class="btn-pricing">Start Free Trial</button>
+        <button class="btn-pricing">Start 14-Day Trial</button>
       </div>
       <!-- Enterprise -->
       <div class="pricing-card animate-on-scroll delay-3">
         <div class="tier">Enterprise</div>
         <div class="price" style="font-size:42px">Custom</div>
-        <p class="desc">For organizations with advanced compliance and scale needs.</p>
+        <p class="desc">For scale-up startups and large orgs with advanced compliance needs.</p>
         <ul>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited parallel builds</li>
           <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.3 4.3L6 11.6l-3.3-3.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Unlimited artifact storage</li>
@@ -1024,7 +1033,7 @@ footer .footer-bottom{
         <ul>
           <li><a href="#">Documentation</a></li>
           <li><a href="#">Community</a></li>
-          <li><a href="#">Status</a></li>
+          <li><a href="#" style="display:inline-flex;align-items:center;gap:6px;"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#34d399;animation:pulse-dot 2s infinite;box-shadow:0 0 6px rgba(52,211,153,0.5);"></span> All Systems Operational</a></li>
           <li><a href="#">GitHub</a></li>
           <li><a href="#">Support</a></li>
         </ul>

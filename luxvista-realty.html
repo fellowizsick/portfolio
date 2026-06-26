@@ -180,9 +180,8 @@ nav .container{
 .hero-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    linear-gradient(135deg, rgba(15,23,41,0.75) 0%, rgba(26,39,68,0.60) 100%),
+    url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80') center/cover no-repeat;
 }
 .hero-particles{
   position:absolute;inset:0;overflow:hidden;
@@ -715,6 +714,22 @@ footer{
   transition:color var(--transition);
 }
 .footer-col ul a:hover{color:var(--gold)}
+.footer-locations li{
+  color:rgba(255,255,255,0.5);
+  font-size:0.9rem;
+  margin-bottom:12px;
+  line-height:1.4;
+}
+.footer-locations li strong{
+  color:var(--white);
+  font-family:var(--font-heading);
+  font-weight:600;
+}
+.footer-locations li span{
+  font-size:0.8rem;
+  color:var(--gold-light);
+  opacity:0.7;
+}
 .footer-bottom{
   border-top:1px solid rgba(255,255,255,0.06);
   padding-top:24px;
@@ -868,20 +883,20 @@ footer{
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-number" data-target="500">0<span class="stat-plus">+</span></div>
+        <div class="stat-number" data-target="2800">0<span class="stat-plus">M+</span></div>
+        <div class="stat-label">Total Sales</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="1200">0<span class="stat-plus">+</span></div>
         <div class="stat-label">Properties Sold</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="45">0<span class="stat-plus">+</span></div>
+        <div class="stat-label">Countries</div>
       </div>
       <div class="stat-item">
         <div class="stat-number" data-target="15">0<span class="stat-plus">+</span></div>
         <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="2000">0<span class="stat-plus">+</span></div>
-        <div class="stat-label">Happy Clients</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="50">0<span class="stat-plus">+</span></div>
-        <div class="stat-label">Awards Won</div>
       </div>
     </div>
   </div>
@@ -898,15 +913,7 @@ footer{
     <div class="properties-grid">
       <div class="property-card reveal">
         <div class="property-img" style="background:linear-gradient(135deg,#1a2d4a,#0a1628)">
-          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
-            <rect width="400" height="240" fill="none"/>
-            <path d="M0 180 Q100 140 200 160 T400 140 L400 240 L0 240 Z" fill="rgba(201,168,76,0.15)"/>
-            <rect x="80" y="80" width="60" height="50" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="150" y="60" width="60" height="70" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="220" y="90" width="60" height="40" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="290" y="70" width="50" height="60" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <circle cx="350" cy="50" r="20" fill="rgba(201,168,76,0.1)"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1613977257363-707f934d7ab6?w=600&q=80" alt="Coastal Mediterranean Villa" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
           <span class="property-badge">&#9733; Featured</span>
           <span class="property-price">$4.8M</span>
         </div>
@@ -925,14 +932,7 @@ footer{
       </div>
       <div class="property-card reveal">
         <div class="property-img" style="background:linear-gradient(135deg,#0a1628,#132244)">
-          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
-            <rect width="400" height="240" fill="none"/>
-            <path d="M0 160 Q100 130 200 150 T400 120 L400 240 L0 240 Z" fill="rgba(201,168,76,0.15)"/>
-            <rect x="60" y="70" width="80" height="60" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="160" y="50" width="80" height="80" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="260" y="80" width="70" height="50" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <circle cx="320" cy="40" r="25" fill="rgba(201,168,76,0.08)"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Penthouse Sky Residence" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
           <span class="property-badge">Just Listed</span>
           <span class="property-price">$8.2M</span>
         </div>
@@ -951,14 +951,7 @@ footer{
       </div>
       <div class="property-card reveal">
         <div class="property-img" style="background:linear-gradient(135deg,#132244,#1a2d4a)">
-          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
-            <rect width="400" height="240" fill="none"/>
-            <path d="M0 170 Q120 140 240 160 T400 130 L400 240 L0 240 Z" fill="rgba(201,168,76,0.12)"/>
-            <rect x="50" y="90" width="70" height="45" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="140" y="70" width="70" height="65" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="230" y="85" width="70" height="50" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="320" y="60" width="50" height="75" rx="3" fill="rgba(255,255,255,0.08)"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Beverly Hills Estate" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
           <span class="property-badge">&#9733; Premium</span>
           <span class="property-price">$6.5M</span>
         </div>
@@ -977,15 +970,7 @@ footer{
       </div>
       <div class="property-card reveal">
         <div class="property-img" style="background:linear-gradient(135deg,#1a2d4a,#0a1628)">
-          <svg width="100%" height="100%" viewBox="0 0 400 240" preserveAspectRatio="none" style="opacity:0.6">
-            <rect width="400" height="240" fill="none"/>
-            <path d="M0 150 Q100 120 200 140 T400 110 L400 240 L0 240 Z" fill="rgba(201,168,76,0.15)"/>
-            <rect x="70" y="60" width="55" height="55" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="140" y="50" width="55" height="65" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="210" y="75" width="55" height="40" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <rect x="280" y="55" width="55" height="60" rx="3" fill="rgba(255,255,255,0.08)"/>
-            <circle cx="370" cy="45" r="18" fill="rgba(201,168,76,0.08)"/>
-          </svg>
+          <img src="https://images.unsplash.com/photo-1600566753086-00f18f6b0152?w=600&q=80" alt="Waterfront Modern Mansion" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
           <span class="property-badge">Exclusive</span>
           <span class="property-price">$12.5M</span>
         </div>
@@ -1070,7 +1055,7 @@ footer{
     <div class="team-grid">
       <div class="team-card reveal">
         <div class="team-avatar">
-          <div class="initials">IC</div>
+          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80" alt="Isabella Carrington" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
         </div>
         <div class="team-card-body">
           <h3>Isabella Carrington</h3>
@@ -1088,7 +1073,7 @@ footer{
       </div>
       <div class="team-card reveal">
         <div class="team-avatar">
-          <div class="initials">JM</div>
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80" alt="James Montgomery" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
         </div>
         <div class="team-card-body">
           <h3>James Montgomery</h3>
@@ -1106,7 +1091,7 @@ footer{
       </div>
       <div class="team-card reveal">
         <div class="team-avatar">
-          <div class="initials">SV</div>
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&q=80" alt="Sofia Vasquez" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">
         </div>
         <div class="team-card-body">
           <h3>Sofia Vasquez</h3>
@@ -1137,12 +1122,12 @@ footer{
       <div class="testimonial-slide active">
         <div class="testimonial-content">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"LuxVista exceeded every expectation. Their team found us a breathtaking oceanfront estate that wasn't even on the market yet. The entire process was seamless and discreet — exactly what we needed."</p>
+          <p class="testimonial-text">LuxVista found us a breathtaking 12,000 sq ft oceanfront estate in Malibu&rsquo;s Carbon Beach enclave that wasn&rsquo;t even listed yet. They negotiated $2.3M below market value and handled the entire closing from our London office. Absolutely seamless.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">RH</div>
+            <div class="testimonial-avatar">RW</div>
             <div class="testimonial-info">
               <h4>Richard &amp; Helena Whitmore</h4>
-              <span>Palm Beach, Florida</span>
+              <span>Carbon Beach, Malibu, CA</span>
             </div>
           </div>
         </div>
@@ -1150,12 +1135,12 @@ footer{
       <div class="testimonial-slide">
         <div class="testimonial-content">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"As an international buyer, I was nervous about the complexities of purchasing property abroad. The LuxVista team handled everything — legal, logistics, renovations — with absolute professionalism."</p>
+          <p class="testimonial-text">As an international buyer from Dubai, I was nervous about purchasing a $14M penthouse in Manhattan. The LuxVista team handled everything &mdash; 1031 exchange structuring, international wire transfers, property management setup &mdash; with absolute professionalism and discretion.</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">AK</div>
             <div class="testimonial-info">
               <h4>Amira Khalil</h4>
-              <span>Dubai / London</span>
+              <span>One57, Manhattan, NY</span>
             </div>
           </div>
         </div>
@@ -1163,12 +1148,12 @@ footer{
       <div class="testimonial-slide">
         <div class="testimonial-content">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"We sold our Manhattan penthouse through LuxVista in under three weeks, achieving 12% above our asking price. Their market knowledge and network of qualified buyers are unmatched."</p>
+          <p class="testimonial-text">We listed our 7-bedroom Central Park West co-op with LuxVista and received three full-price offers within 10 days. Final sale closed at 18% above asking. Their market knowledge and curated buyer network are simply unmatched in New York.</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">MD</div>
             <div class="testimonial-info">
               <h4>Marcus DeLuca</h4>
-              <span>New York City</span>
+              <span>Central Park West, NYC</span>
             </div>
           </div>
         </div>
@@ -1176,12 +1161,12 @@ footer{
       <div class="testimonial-slide">
         <div class="testimonial-content">
           <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="testimonial-text">"From our first meeting to closing day, the level of attention to detail was extraordinary. LuxVista doesn't just sell homes — they curate lifestyles. We are clients for life."</p>
+          <p class="testimonial-text">From our first meeting at their Beverly Hills headquarters to closing on our dream estate in Bel Air, the level of detail was extraordinary. Sofia sourced Italian Carrara marble for the renovation and coordinated with our interior designer across three time zones.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">JC</div>
+            <div class="testimonial-avatar">JL</div>
             <div class="testimonial-info">
               <h4>Jennifer &amp; Christopher Lane</h4>
-              <span>San Francisco, CA</span>
+              <span>Bel Air, Los Angeles, CA</span>
             </div>
           </div>
         </div>
@@ -1208,7 +1193,8 @@ footer{
       <p class="section-desc" style="margin:0 auto">Ready to explore exceptional properties? Reach out and let us curate your perfect experience.</p>
     </div>
     <div class="contact-wrapper">
-      <form class="contact-form" id="contactForm" onsubmit="return handleForm(event)">
+      <form class="contact-form" id="contactForm" name="LuxVista Contact" method="POST" data-netlify="true" onsubmit="return handleForm(event)">
+          <input type="hidden" name="form-name" value="LuxVista Contact">
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">First Name</label>
@@ -1351,12 +1337,12 @@ footer{
       </div>
       <div class="footer-col">
         <h4>Locations</h4>
-        <ul>
-          <li><a href="#">Beverly Hills</a></li>
-          <li><a href="#">Manhattan</a></li>
-          <li><a href="#">Miami Beach</a></li>
-          <li><a href="#">Lake Como</a></li>
-          <li><a href="#">Saint-Tropez</a></li>
+        <ul class="footer-locations">
+          <li><strong>Beverly Hills</strong><br><span>90210 &amp; The Flats</span></li>
+          <li><strong>Manhattan</strong><br><span>Central Park &amp; Tribeca</span></li>
+          <li><strong>Miami Beach</strong><br><span>Fisher Island &amp; South Beach</span></li>
+          <li><strong>Lake Como</strong><br><span>Bellagio &amp; Laglio</span></li>
+          <li><strong>Saint-Tropez</strong><br><span>French Riviera</span></li>
         </ul>
       </div>
     </div>
